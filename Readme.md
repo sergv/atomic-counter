@@ -37,670 +37,671 @@ increments between the threads. Current package is shown as `Counter`.
 ```
 $ cabal run --builddir /tmp/dist bench -- -j1 --timeout 30
 All
-  Correctness:          OK (15.52s)
+  Correctness:          OK (15.95s)
     +++ OK, passed 10000 tests.
   Read/write contention with 10 iterations and 1 threads
-    Counter:            OK (0.42s)
-      785  ns ±  27 ns
-    IORef inconsistent: OK (0.16s)
-      1.12 μs ±  95 ns
-    IORef atomic:       OK (0.16s)
-      1.08 μs ±  99 ns
-    MVar:               OK (0.62s)
-      1.15 μs ±  40 ns
-    TMVar:              OK (0.50s)
-      896  ns ±  31 ns
-    TVar:               OK (0.15s)
-      1.01 μs ±  92 ns
-    Addr:               OK (0.74s)
-      679  ns ±  48 ns
+    Counter:            OK (0.45s)
+      814  ns ±  52 ns
+    IORef inconsistent: OK (0.61s)
+      1.10 μs ±  70 ns, 1.35x
+    IORef atomic:       OK (1.26s)
+      1.19 μs ±  25 ns, 1.46x
+    MVar:               OK (0.64s)
+      1.18 μs ±  39 ns, 1.46x
+    TMVar:              OK (0.52s)
+      914  ns ±  49 ns, 1.12x
+    TVar:               OK (0.63s)
+      1.14 μs ±  73 ns, 1.40x
+    Addr:               OK (1.63s)
+      734  ns ±  56 ns, 0.90x
   Read/write contention with 100 iterations and 1 threads
-    Counter:            OK (0.15s)
-      1.01 μs ±  89 ns
-    IORef inconsistent: OK (0.23s)
-      3.38 μs ± 198 ns
+    Counter:            OK (1.36s)
+      1.21 μs ±  26 ns
+    IORef inconsistent: OK (0.27s)
+      3.82 μs ± 341 ns, 3.15x
     IORef atomic:       OK (0.44s)
-      3.03 μs ±  91 ns
-    MVar:               OK (0.24s)
-      3.35 μs ± 167 ns
-    TMVar:              OK (0.17s)
-      4.64 μs ± 328 ns
-    TVar:               OK (0.14s)
-      4.09 μs ± 372 ns
-    Addr:               OK (0.57s)
-      1.04 μs ±  43 ns
-  Read/write contention with 1000 iterations and 1 threads
-    Counter:            OK (0.17s)
-      4.80 μs ± 389 ns
-    IORef inconsistent: OK (0.16s)
-      18.4 μs ± 1.4 μs
-    IORef atomic:       OK (0.19s)
-      23.3 μs ± 2.1 μs
-    MVar:               OK (0.13s)
-      15.6 μs ± 1.3 μs
-    TMVar:              OK (0.21s)
-      49.5 μs ± 4.8 μs
-    TVar:               OK (0.16s)
-      38.3 μs ± 3.3 μs
-    Addr:               OK (0.22s)
-      5.88 μs ± 369 ns
-  Read/write contention with 10000 iterations and 1 threads
-    Counter:            OK (0.18s)
-      41.8 μs ± 2.7 μs
-    IORef inconsistent: OK (0.23s)
-      224  μs ±  21 μs
-    IORef atomic:       OK (0.18s)
-      169  μs ±  15 μs
-    MVar:               OK (0.20s)
-      187  μs ±  15 μs
-    TMVar:              OK (0.21s)
-      409  μs ±  25 μs
-    TVar:               OK (0.16s)
-      304  μs ±  25 μs
-    Addr:               OK (0.22s)
-      52.7 μs ± 4.1 μs
-  Read/write contention with 10 iterations and 2 threads
-    Counter:            OK (0.11s)
-      7.05 μs ± 667 ns
-    IORef inconsistent: OK (0.22s)
-      7.43 μs ± 599 ns
-    IORef atomic:       OK (0.22s)
-      7.19 μs ± 719 ns
-    MVar:               OK (0.47s)
-      7.42 μs ± 671 ns
-    TMVar:              OK (0.24s)
-      8.01 μs ± 773 ns
-    TVar:               OK (0.22s)
-      7.45 μs ± 585 ns
-    Addr:               OK (0.23s)
-      6.99 μs ± 601 ns
-  Read/write contention with 100 iterations and 2 threads
-    Counter:            OK (0.16s)
-      8.88 μs ± 749 ns
-    IORef inconsistent: OK (0.16s)
-      12.1 μs ± 975 ns
-    IORef atomic:       OK (0.16s)
-      12.1 μs ± 736 ns
-    MVar:               OK (0.13s)
-      17.6 μs ± 1.7 μs
-    TMVar:              OK (0.18s)
-      29.7 μs ± 2.2 μs
-    TVar:               OK (0.14s)
-      24.8 μs ± 2.0 μs
-    Addr:               OK (0.29s)
-      8.52 μs ± 555 ns
-  Read/write contention with 1000 iterations and 2 threads
-    Counter:            OK (0.85s)
-      42.8 μs ± 1.2 μs
-    IORef inconsistent: OK (4.85s)
-      140  μs ± 2.1 μs
-    IORef atomic:       OK (0.30s)
-      277  μs ±  12 μs
-    MVar:               OK (0.33s)
-      5.29 ms ± 224 μs
-    TMVar:              OK (0.64s)
-      270  μs ±  16 μs
-    TVar:               OK (0.64s)
-      306  μs ±  18 μs
-    Addr:               OK (0.23s)
-      47.4 μs ± 2.1 μs
-  Read/write contention with 10000 iterations and 2 threads
-    Counter:            OK (0.11s)
-      298  μs ±  28 μs
-    IORef inconsistent: OK (0.08s)
-      1.01 ms ±  99 μs
-    IORef atomic:       OK (0.99s)
-      1.26 ms ±  19 μs
-    MVar:               OK (0.45s)
-      62.7 ms ± 3.9 ms
-    TMVar:              OK (0.42s)
-      2.96 ms ± 257 μs
-    TVar:               OK (6.90s)
-      3.26 ms ± 149 μs
-    Addr:               OK (0.08s)
-      527  μs ±  45 μs
-  Read/write contention with 10 iterations and 4 threads
-    Counter:            OK (0.16s)
-      15.0 μs ± 820 ns
-    IORef inconsistent: OK (0.17s)
-      16.4 μs ± 946 ns
-    IORef atomic:       OK (0.38s)
-      19.2 μs ± 937 ns
-    MVar:               OK (0.20s)
-      27.5 μs ± 2.4 μs
-    TMVar:              OK (0.10s)
-      20.2 μs ± 1.3 μs
-    TVar:               OK (0.19s)
-      18.2 μs ± 781 ns
-    Addr:               OK (0.09s)
-      15.5 μs ± 1.4 μs
-  Read/write contention with 100 iterations and 4 threads
-    Counter:            OK (0.40s)
-      23.1 μs ± 1.8 μs
-    IORef inconsistent: OK (0.09s)
-      56.3 μs ± 4.7 μs
-    IORef atomic:       OK (0.24s)
-      157  μs ± 3.9 μs
-    MVar:               OK (0.16s)
-      1.20 ms ± 115 μs
-    TMVar:              OK (0.07s)
-      193  μs ±  19 μs
-    TVar:               OK (0.13s)
-      214  μs ± 7.9 μs
-    Addr:               OK (0.39s)
-      22.3 μs ± 491 ns
-  Read/write contention with 1000 iterations and 4 threads
-    Counter:            OK (0.17s)
-      242  μs ±  13 μs
-    IORef inconsistent: OK (0.07s)
-      485  μs ±  32 μs
-    IORef atomic:       OK (2.02s)
-      1.51 ms ±  54 μs
-    MVar:               OK (0.19s)
-      12.4 ms ± 1.2 ms
-    TMVar:              OK (0.14s)
-      2.01 ms ±  76 μs
-    TVar:               OK (0.07s)
-      1.92 ms ±  99 μs
-    Addr:               OK (0.08s)
-      233  μs ±  12 μs
-  Read/write contention with 10000 iterations and 4 threads
-    Counter:            OK (0.17s)
-      2.44 ms ±  82 μs
-    IORef inconsistent: OK (0.08s)
-      4.49 ms ± 291 μs
-    IORef atomic:       OK (0.84s)
-      18.3 ms ± 941 μs
-    MVar:               OK (0.39s)
-      125  ms ±  12 ms
-    TMVar:              OK (0.16s)
-      18.7 ms ± 1.8 ms
-    TVar:               OK (0.08s)
-      18.8 ms ± 1.3 ms
-    Addr:               OK (0.67s)
-      2.27 ms ±  80 μs
-  Read/write contention with 10 iterations and 6 threads
-    Counter:            OK (0.23s)
-      24.1 μs ± 1.7 μs
-    IORef inconsistent: OK (0.25s)
-      26.1 μs ± 1.4 μs
-    IORef atomic:       OK (0.18s)
-      41.1 μs ± 2.2 μs
-    MVar:               OK (0.32s)
-      46.8 μs ± 3.2 μs
-    TMVar:              OK (0.53s)
-      33.8 μs ± 2.5 μs
-    TVar:               OK (0.07s)
-      32.5 μs ± 2.7 μs
-    Addr:               OK (0.12s)
-      24.5 μs ± 2.4 μs
-  Read/write contention with 100 iterations and 6 threads
-    Counter:            OK (0.29s)
-      40.2 μs ± 3.1 μs
-    IORef inconsistent: OK (0.12s)
-      100  μs ± 5.9 μs
-    IORef atomic:       OK (0.14s)
-      352  μs ±  30 μs
-    MVar:               OK (0.12s)
-      1.82 ms ± 168 μs
-    TMVar:              OK (0.92s)
-      544  μs ±  43 μs
-    TVar:               OK (0.23s)
-      561  μs ±  28 μs
-    Addr:               OK (0.30s)
-      38.9 μs ± 2.1 μs
-  Read/write contention with 1000 iterations and 6 threads
-    Counter:            OK (0.87s)
-      477  μs ± 4.3 μs
-    IORef inconsistent: OK (0.20s)
-      1.01 ms ±  61 μs
-    IORef atomic:       OK (0.85s)
-      3.05 ms ± 154 μs
-    MVar:               OK (0.62s)
-      19.8 ms ± 1.5 ms
-    TMVar:              OK (0.06s)
-      4.65 ms ± 428 μs
-    TVar:               OK (0.25s)
-      4.78 ms ± 117 μs
-    Addr:               OK (0.22s)
-      477  μs ±  32 μs
-  Read/write contention with 10000 iterations and 6 threads
-    Counter:            OK (2.01s)
-      4.82 ms ± 131 μs
-    IORef inconsistent: OK (0.12s)
-      9.87 ms ± 230 μs
-    IORef atomic:       OK (6.61s)
-      66.0 ms ±  24 ms
-    MVar:               OK (1.31s)
-      194  ms ± 3.5 ms
-    TMVar:              OK (0.63s)
-      52.3 ms ± 290 μs
-    TVar:               OK (0.07s)
-      48.5 ms ± 4.5 ms
-    Addr:               OK (0.03s)
-      4.82 ms ± 479 μs
-  Read/write contention with 10 iterations and 8 threads
-    Counter:            OK (0.13s)
-      26.3 μs ± 2.1 μs
-    IORef inconsistent: OK (0.16s)
-      28.8 μs ± 1.8 μs
-    IORef atomic:       OK (0.25s)
-      56.2 μs ± 5.2 μs
-    MVar:               OK (0.71s)
-      95.8 μs ± 9.1 μs
-    TMVar:              OK (0.19s)
-      52.3 μs ± 1.8 μs
-    TVar:               OK (0.18s)
-      47.9 μs ± 2.0 μs
-    Addr:               OK (0.13s)
-      26.1 μs ± 1.9 μs
-  Read/write contention with 100 iterations and 8 threads
-    Counter:            OK (0.05s)
-      60.9 μs ± 5.5 μs
-    IORef inconsistent: OK (0.58s)
-      120  μs ± 2.4 μs
-    IORef atomic:       OK (0.62s)
-      706  μs ± 9.6 μs
-    MVar:               OK (0.16s)
-      2.26 ms ± 209 μs
-    TMVar:              OK (0.07s)
-      571  μs ±  53 μs
-    TVar:               OK (0.28s)
-      556  μs ± 6.8 μs
-    Addr:               OK (0.10s)
-      58.8 μs ± 5.0 μs
-  Read/write contention with 1000 iterations and 8 threads
-    Counter:            OK (0.28s)
-      588  μs ±  17 μs
-    IORef inconsistent: OK (1.07s)
-      1.15 ms ± 8.3 μs
-    IORef atomic:       OK (5.86s)
-      6.91 ms ± 986 μs
-    MVar:               OK (0.71s)
-      22.9 ms ± 842 μs
-    TMVar:              OK (0.16s)
-      6.10 ms ± 542 μs
-    TVar:               OK (0.09s)
-      5.76 ms ± 457 μs
-    Addr:               OK (0.07s)
-      624  μs ±  49 μs
-  Read/write contention with 10000 iterations and 8 threads
-    Counter:            OK (0.65s)
-      5.99 ms ± 259 μs
-    IORef inconsistent: OK (0.08s)
-      11.4 ms ± 403 μs
-    IORef atomic:       OK (9.50s)
-      160  ms ±  43 ms
-    MVar:               OK (0.74s)
-      246  ms ±  21 ms
-    TMVar:              OK (0.04s)
-      50.4 ms ± 3.0 ms
-    TVar:               OK (0.79s)
-      58.5 ms ± 1.3 ms
-    Addr:               OK (0.17s)
-      5.51 ms ± 226 μs
-  Read/write contention with 10 iterations and 12 threads
-    Counter:            OK (0.14s)
-      29.8 μs ± 2.8 μs
-    IORef inconsistent: OK (0.08s)
-      34.5 μs ± 2.8 μs
-    IORef atomic:       OK (0.27s)
-      71.0 μs ± 3.3 μs
-    MVar:               OK (0.23s)
-      229  μs ±  15 μs
-    TMVar:              OK (0.87s)
-      81.1 μs ± 697 ns
-    TVar:               OK (0.21s)
-      76.2 μs ± 5.6 μs
-    Addr:               OK (0.14s)
-      29.3 μs ± 2.3 μs
-  Read/write contention with 100 iterations and 12 threads
-    Counter:            OK (0.25s)
-      92.8 μs ± 7.8 μs
-    IORef inconsistent: OK (0.06s)
-      179  μs ±  16 μs
-    IORef atomic:       OK (0.43s)
-      976  μs ±  30 μs
+      2.96 μs ± 261 ns, 2.44x
     MVar:               OK (0.43s)
-      3.07 ms ± 172 μs
-    TMVar:              OK (0.11s)
-      946  μs ±  44 μs
-    TVar:               OK (0.24s)
-      1.05 ms ±  43 μs
-    Addr:               OK (0.24s)
-      90.4 μs ± 4.5 μs
-  Read/write contention with 1000 iterations and 12 threads
-    Counter:            OK (0.11s)
-      1.01 ms ±  37 μs
-    IORef inconsistent: OK (0.10s)
-      1.76 ms ± 174 μs
-    IORef atomic:       OK (2.73s)
-      11.9 ms ± 434 μs
-    MVar:               OK (0.28s)
-      36.3 ms ± 2.7 ms
-    TMVar:              OK (0.07s)
-      10.6 ms ± 819 μs
-    TVar:               OK (0.25s)
-      9.24 ms ± 596 μs
-    Addr:               OK (0.84s)
-      902  μs ±  61 μs
-  Read/write contention with 10000 iterations and 12 threads
-    Counter:            OK (0.25s)
-      9.15 ms ± 853 μs
+      3.11 μs ± 172 ns, 2.56x
+    TMVar:              OK (0.16s)
+      4.56 μs ± 412 ns, 3.76x
+    TVar:               OK (0.64s)
+      4.43 μs ± 261 ns, 3.65x
+    Addr:               OK (0.60s)
+      1.09 μs ±  78 ns, 0.90x
+  Read/write contention with 1000 iterations and 1 threads
+    Counter:            OK (0.35s)
+      4.84 μs ± 377 ns
+    IORef inconsistent: OK (0.32s)
+      18.7 μs ± 836 ns, 3.86x
+    IORef atomic:       OK (1.35s)
+      19.5 μs ± 713 ns, 4.02x
+    MVar:               OK (0.14s)
+      15.7 μs ± 1.4 μs, 3.24x
+    TMVar:              OK (0.20s)
+      43.8 μs ± 3.3 μs, 9.07x
+    TVar:               OK (0.14s)
+      31.4 μs ± 3.0 μs, 6.49x
+    Addr:               OK (0.37s)
+      4.97 μs ± 348 ns, 1.03x
+  Read/write contention with 10000 iterations and 1 threads
+    Counter:            OK (2.95s)
+      43.0 μs ± 689 ns
+    IORef inconsistent: OK (0.20s)
+      185  μs ±  15 μs, 4.30x
+    IORef atomic:       OK (0.44s)
+      214  μs ±  18 μs, 4.97x
+    MVar:               OK (2.63s)
+      154  μs ± 1.6 μs, 3.58x
+    TMVar:              OK (0.42s)
+      407  μs ±  11 μs, 9.45x
+    TVar:               OK (0.16s)
+      302  μs ±  23 μs, 7.02x
+    Addr:               OK (0.18s)
+      42.0 μs ± 3.4 μs, 0.98x
+  Read/write contention with 10 iterations and 2 threads
+    Counter:            OK (0.23s)
+      6.97 μs ± 487 ns
+    IORef inconsistent: OK (0.48s)
+      7.78 μs ± 660 ns, 1.12x
+    IORef atomic:       OK (0.29s)
+      7.84 μs ± 662 ns, 1.12x
+    MVar:               OK (0.13s)
+      7.24 μs ± 684 ns, 1.04x
+    TMVar:              OK (2.54s)
+      9.33 μs ± 358 ns, 1.34x
+    TVar:               OK (0.14s)
+      7.50 μs ± 724 ns, 1.08x
+    Addr:               OK (0.28s)
+      7.75 μs ± 470 ns, 1.11x
+  Read/write contention with 100 iterations and 2 threads
+    Counter:            OK (0.30s)
+      8.35 μs ± 567 ns
+    IORef inconsistent: OK (0.18s)
+      12.5 μs ± 902 ns, 1.49x
+    IORef atomic:       OK (0.17s)
+      12.2 μs ± 903 ns, 1.47x
+    MVar:               OK (0.12s)
+      14.6 μs ± 1.4 μs, 1.74x
+    TMVar:              OK (0.34s)
+      31.9 μs ± 1.6 μs, 3.83x
+    TVar:               OK (0.66s)
+      28.8 μs ± 1.8 μs, 3.45x
+    Addr:               OK (0.14s)
+      8.09 μs ± 689 ns, 0.97x
+  Read/write contention with 1000 iterations and 2 threads
+    Counter:            OK (0.12s)
+      48.8 μs ± 2.8 μs
+    IORef inconsistent: OK (1.14s)
+      123  μs ± 3.0 μs, 2.52x
+    IORef atomic:       OK (0.15s)
+      256  μs ±  22 μs, 5.25x
+    MVar:               OK (2.40s)
+      4.98 ms ± 337 μs, 102.10x
+    TMVar:              OK (0.29s)
+      240  μs ±  24 μs, 4.92x
+    TVar:               OK (0.17s)
+      288  μs ±  25 μs, 5.91x
+    Addr:               OK (0.23s)
+      47.4 μs ± 1.9 μs, 0.97x
+  Read/write contention with 10000 iterations and 2 threads
+    Counter:            OK (0.18s)
+      626  μs ±  34 μs
+    IORef inconsistent: OK (0.09s)
+      1.39 ms ± 136 μs, 2.23x
+    IORef atomic:       OK (10.19s)
+      2.03 ms ± 1.1 ms, 3.24x
+    MVar:               OK (0.82s)
+      57.8 ms ± 2.7 ms, 92.36x
+    TMVar:              OK (0.09s)
+      2.37 ms ± 189 μs, 3.78x
+    TVar:               OK (0.21s)
+      2.98 ms ± 281 μs, 4.76x
+    Addr:               OK (0.29s)
+      538  μs ±  22 μs, 0.86x
+  Read/write contention with 10 iterations and 4 threads
+    Counter:            OK (0.09s)
+      15.6 μs ± 1.4 μs
+    IORef inconsistent: OK (0.16s)
+      16.0 μs ± 776 ns, 1.03x
+    IORef atomic:       OK (0.34s)
+      16.9 μs ± 1.6 μs, 1.08x
+    MVar:               OK (0.18s)
+      25.5 μs ± 1.4 μs, 1.64x
+    TMVar:              OK (0.17s)
+      19.9 μs ± 1.2 μs, 1.27x
+    TVar:               OK (0.17s)
+      18.1 μs ± 1.1 μs, 1.16x
+    Addr:               OK (0.07s)
+      14.0 μs ± 1.4 μs, 0.90x
+  Read/write contention with 100 iterations and 4 threads
+    Counter:            OK (0.20s)
+      23.4 μs ± 1.6 μs
+    IORef inconsistent: OK (0.09s)
+      56.3 μs ± 3.3 μs, 2.41x
+    IORef atomic:       OK (0.42s)
+      143  μs ±  10 μs, 6.11x
+    MVar:               OK (0.16s)
+      1.19 ms ± 112 μs, 51.05x
+    TMVar:              OK (0.25s)
+      195  μs ±  19 μs, 8.36x
+    TVar:               OK (0.14s)
+      202  μs ±  14 μs, 8.65x
+    Addr:               OK (0.20s)
+      22.5 μs ± 1.7 μs, 0.96x
+  Read/write contention with 1000 iterations and 4 threads
+    Counter:            OK (0.16s)
+      231  μs ±  18 μs
+    IORef inconsistent: OK (0.04s)
+      453  μs ±  42 μs, 1.96x
+    IORef atomic:       OK (0.47s)
+      1.36 ms ±  88 μs, 5.90x
+    MVar:               OK (0.21s)
+      12.7 ms ± 1.0 ms, 54.99x
+    TMVar:              OK (0.27s)
+      1.77 ms ±  85 μs, 7.69x
+    TVar:               OK (0.15s)
+      1.81 ms ± 110 μs, 7.87x
+    Addr:               OK (0.09s)
+      231  μs ±  13 μs, 1.00x
+  Read/write contention with 10000 iterations and 4 threads
+    Counter:            OK (0.04s)
+      2.21 ms ± 197 μs
+    IORef inconsistent: OK (0.08s)
+      4.54 ms ± 299 μs, 2.05x
+    IORef atomic:       OK (5.62s)
+      15.0 ms ± 1.2 ms, 6.80x
+    MVar:               OK (1.92s)
+      124  ms ± 671 μs, 56.22x
+    TMVar:              OK (0.17s)
+      19.9 ms ± 1.8 ms, 8.97x
+    TVar:               OK (0.34s)
+      20.0 ms ± 503 μs, 9.04x
+    Addr:               OK (0.08s)
+      2.30 ms ±  92 μs, 1.04x
+  Read/write contention with 10 iterations and 6 threads
+    Counter:            OK (0.21s)
+      22.4 μs ± 1.9 μs
     IORef inconsistent: OK (0.12s)
-      18.7 ms ± 904 μs
-    IORef atomic:       OK (2.28s)
-      292  ms ±  19 ms
-    MVar:               OK (5.38s)
-      350  ms ± 4.1 ms
-    TMVar:              OK (2.57s)
-      104  ms ± 5.6 ms
-    TVar:               OK (0.62s)
-      104  ms ± 3.0 ms
+      24.8 μs ± 2.0 μs, 1.11x
+    IORef atomic:       OK (0.15s)
+      35.9 μs ± 2.3 μs, 1.60x
+    MVar:               OK (0.15s)
+      76.8 μs ± 5.9 μs, 3.44x
+    TMVar:              OK (0.60s)
+      33.3 μs ± 3.2 μs, 1.49x
+    TVar:               OK (0.53s)
+      35.0 μs ± 2.6 μs, 1.57x
     Addr:               OK (0.12s)
-      9.65 ms ± 799 μs
+      22.9 μs ± 2.3 μs, 1.03x
+  Read/write contention with 100 iterations and 6 threads
+    Counter:            OK (0.08s)
+      50.8 μs ± 5.0 μs
+    IORef inconsistent: OK (0.06s)
+      99.4 μs ± 9.8 μs, 1.96x
+    IORef atomic:       OK (0.09s)
+      450  μs ±  40 μs, 8.86x
+    MVar:               OK (0.25s)
+      1.85 ms ±  92 μs, 36.35x
+    TMVar:              OK (0.21s)
+      412  μs ±  30 μs, 8.11x
+    TVar:               OK (0.06s)
+      587  μs ±  49 μs, 11.56x
+    Addr:               OK (0.58s)
+      46.8 μs ± 2.4 μs, 0.92x
+  Read/write contention with 1000 iterations and 6 threads
+    Counter:            OK (0.13s)
+      484  μs ±  21 μs
+    IORef inconsistent: OK (3.26s)
+      849  μs ± 282 μs, 1.75x
+    IORef atomic:       OK (0.53s)
+      3.06 ms ± 287 μs, 6.32x
+    MVar:               OK (0.30s)
+      19.1 ms ± 1.9 ms, 39.47x
+    TMVar:              OK (4.08s)
+      4.98 ms ± 1.1 ms, 10.28x
+    TVar:               OK (0.13s)
+      4.85 ms ± 293 μs, 10.01x
+    Addr:               OK (0.11s)
+      510  μs ±  17 μs, 1.05x
+  Read/write contention with 10000 iterations and 6 threads
+    Counter:            OK (0.25s)
+      4.44 ms ± 128 μs
+    IORef inconsistent: OK (0.12s)
+      9.94 ms ± 442 μs, 2.24x
+    IORef atomic:       OK (6.67s)
+      61.3 ms ±  13 ms, 13.82x
+    MVar:               OK (2.85s)
+      189  ms ± 2.5 ms, 42.55x
+    TMVar:              OK (0.16s)
+      55.3 ms ± 2.7 ms, 12.45x
+    TVar:               OK (0.62s)
+      49.7 ms ± 3.6 ms, 11.18x
+    Addr:               OK (0.07s)
+      5.06 ms ± 282 μs, 1.14x
+  Read/write contention with 10 iterations and 8 threads
+    Counter:            OK (0.12s)
+      25.8 μs ± 1.4 μs
+    IORef inconsistent: OK (0.14s)
+      29.3 μs ± 2.6 μs, 1.13x
+    IORef atomic:       OK (0.21s)
+      52.2 μs ± 2.2 μs, 2.02x
+    MVar:               OK (0.23s)
+      117  μs ± 7.8 μs, 4.54x
+    TMVar:              OK (0.09s)
+      55.7 μs ± 5.5 μs, 2.16x
+    TVar:               OK (1.32s)
+      53.4 μs ± 561 ns, 2.07x
+    Addr:               OK (0.12s)
+      26.0 μs ± 2.4 μs, 1.01x
+  Read/write contention with 100 iterations and 8 threads
+    Counter:            OK (0.10s)
+      63.5 μs ± 3.5 μs
+    IORef inconsistent: OK (1.16s)
+      123  μs ± 7.7 μs, 1.94x
+    IORef atomic:       OK (0.26s)
+      632  μs ±  43 μs, 9.94x
+    MVar:               OK (0.30s)
+      2.27 ms ± 222 μs, 35.73x
+    TMVar:              OK (1.15s)
+      643  μs ± 9.9 μs, 10.12x
+    TVar:               OK (0.29s)
+      642  μs ±  52 μs, 10.10x
+    Addr:               OK (0.10s)
+      61.4 μs ± 5.2 μs, 0.97x
+  Read/write contention with 1000 iterations and 8 threads
+    Counter:            OK (0.15s)
+      553  μs ±  37 μs
+    IORef inconsistent: OK (0.04s)
+      1.04 ms ±  85 μs, 1.88x
+    IORef atomic:       OK (5.60s)
+      6.58 ms ± 166 μs, 11.89x
+    MVar:               OK (0.36s)
+      23.1 ms ± 2.1 ms, 41.80x
+    TMVar:              OK (0.17s)
+      6.55 ms ± 273 μs, 11.83x
+    TVar:               OK (2.59s)
+      6.17 ms ± 247 μs, 11.14x
+    Addr:               OK (0.08s)
+      624  μs ±  27 μs, 1.13x
+  Read/write contention with 10000 iterations and 8 threads
+    Counter:            OK (0.08s)
+      5.04 ms ± 445 μs
+    IORef inconsistent: OK (0.08s)
+      11.8 ms ± 386 μs, 2.35x
+    IORef atomic:       OK (7.71s)
+      141  ms ±  12 ms, 27.99x
+    MVar:               OK (0.77s)
+      255  ms ±  11 ms, 50.70x
+    TMVar:              OK (0.80s)
+      67.6 ms ± 280 μs, 13.42x
+    TVar:               OK (0.10s)
+      55.6 ms ± 1.5 ms, 11.03x
+    Addr:               OK (0.32s)
+      6.25 ms ± 470 μs, 1.24x
+  Read/write contention with 10 iterations and 12 threads
+    Counter:            OK (0.13s)
+      29.0 μs ± 1.9 μs
+    IORef inconsistent: OK (0.14s)
+      34.2 μs ± 3.2 μs, 1.18x
+    IORef atomic:       OK (1.01s)
+      73.3 μs ± 1.4 μs, 2.53x
+    MVar:               OK (0.23s)
+      236  μs ±  20 μs, 8.15x
+    TMVar:              OK (0.44s)
+      83.2 μs ± 2.8 μs, 2.87x
+    TVar:               OK (0.11s)
+      66.2 μs ± 3.2 μs, 2.28x
+    Addr:               OK (0.08s)
+      29.3 μs ± 2.6 μs, 1.01x
+  Read/write contention with 100 iterations and 12 threads
+    Counter:            OK (0.24s)
+      98.7 μs ± 4.9 μs
+    IORef inconsistent: OK (0.21s)
+      194  μs ±  14 μs, 1.97x
+    IORef atomic:       OK (0.43s)
+      1.01 ms ±  47 μs, 10.28x
+    MVar:               OK (0.43s)
+      3.21 ms ±  92 μs, 32.54x
+    TMVar:              OK (0.93s)
+      1.05 ms ±  13 μs, 10.68x
+    TVar:               OK (0.06s)
+      1.06 ms ±  64 μs, 10.71x
+    Addr:               OK (0.06s)
+      92.2 μs ± 8.7 μs, 0.93x
+  Read/write contention with 1000 iterations and 12 threads
+    Counter:            OK (0.23s)
+      1.00 ms ±  48 μs
+    IORef inconsistent: OK (0.10s)
+      1.95 ms ±  45 μs, 1.94x
+    IORef atomic:       OK (0.90s)
+      16.7 ms ± 574 μs, 16.58x
+    MVar:               OK (0.26s)
+      36.1 ms ± 2.8 ms, 35.91x
+    TMVar:              OK (0.53s)
+      10.8 ms ± 334 μs, 10.72x
+    TVar:               OK (0.25s)
+      9.37 ms ± 265 μs, 9.33x
+    Addr:               OK (0.10s)
+      768  μs ±  56 μs, 0.76x
+  Read/write contention with 10000 iterations and 12 threads
+    Counter:            OK (0.12s)
+      8.38 ms ± 385 μs
+    IORef inconsistent: OK (0.03s)
+      14.6 ms ± 1.4 ms, 1.75x
+    IORef atomic:       OK (9.26s)
+      282  ms ± 135 ms, 33.61x
+    MVar:               OK (1.09s)
+      338  ms ±  11 ms, 40.40x
+    TMVar:              OK (0.63s)
+      106  ms ± 2.3 ms, 12.64x
+    TVar:               OK (0.31s)
+      100  ms ± 6.2 ms, 11.90x
+    Addr:               OK (0.06s)
+      9.71 ms ± 794 μs, 1.16x
   Read/write contention with 10 iterations and 16 threads
     Counter:            OK (0.09s)
-      40.4 μs ± 2.8 μs
-    IORef inconsistent: OK (0.11s)
-      47.7 μs ± 2.9 μs
-    IORef atomic:       OK (0.29s)
-      133  μs ± 8.6 μs
-    MVar:               OK (0.76s)
-      390  μs ±  13 μs
-    TMVar:              OK (0.08s)
-      98.5 μs ± 6.9 μs
-    TVar:               OK (1.18s)
-      125  μs ±  10 μs
+      40.5 μs ± 2.8 μs
+    IORef inconsistent: OK (0.09s)
+      48.5 μs ± 4.6 μs, 1.20x
+    IORef atomic:       OK (0.13s)
+      144  μs ±  10 μs, 3.56x
+    MVar:               OK (0.20s)
+      400  μs ±  36 μs, 9.86x
+    TMVar:              OK (0.59s)
+      123  μs ±  11 μs, 3.04x
+    TVar:               OK (0.60s)
+      130  μs ±  12 μs, 3.21x
     Addr:               OK (0.09s)
-      40.6 μs ± 2.7 μs
+      40.5 μs ± 3.5 μs, 1.00x
   Read/write contention with 100 iterations and 16 threads
     Counter:            OK (0.08s)
-      133  μs ± 6.5 μs
-    IORef inconsistent: OK (0.14s)
-      275  μs ± 9.8 μs
-    IORef atomic:       OK (1.04s)
-      1.28 ms ±  31 μs
-    MVar:               OK (0.57s)
-      4.34 ms ± 330 μs
-    TMVar:              OK (0.60s)
-      1.39 ms ± 8.3 μs
-    TVar:               OK (0.16s)
-      1.40 ms ±  73 μs
+      133  μs ±  11 μs
+    IORef inconsistent: OK (0.07s)
+      278  μs ±  23 μs, 2.09x
+    IORef atomic:       OK (1.94s)
+      1.25 ms ±  76 μs, 9.39x
+    MVar:               OK (0.56s)
+      4.21 ms ± 380 μs, 31.66x
+    TMVar:              OK (0.15s)
+      1.48 ms ±  43 μs, 11.12x
+    TVar:               OK (0.08s)
+      1.40 ms ±  68 μs, 10.55x
     Addr:               OK (0.16s)
-      130  μs ±  12 μs
+      134  μs ± 4.8 μs, 1.00x
   Read/write contention with 1000 iterations and 16 threads
-    Counter:            OK (0.30s)
-      1.31 ms ±  82 μs
+    Counter:            OK (0.29s)
+      1.36 ms ±  11 μs
     IORef inconsistent: OK (0.14s)
-      2.51 ms ±  56 μs
-    IORef atomic:       OK (3.03s)
-      14.6 ms ± 1.4 ms
-    MVar:               OK (0.71s)
-      46.5 ms ± 3.9 ms
-    TMVar:              OK (0.08s)
-      13.8 ms ± 721 μs
-    TVar:               OK (0.69s)
-      12.8 ms ± 806 μs
-    Addr:               OK (0.29s)
-      1.33 ms ±  23 μs
+      2.46 ms ±  69 μs, 1.81x
+    IORef atomic:       OK (6.70s)
+      15.9 ms ± 1.7 ms, 11.73x
+    MVar:               OK (1.38s)
+      44.5 ms ± 3.2 ms, 32.79x
+    TMVar:              OK (0.34s)
+      14.2 ms ± 551 μs, 10.43x
+    TVar:               OK (0.17s)
+      14.0 ms ± 314 μs, 10.35x
+    Addr:               OK (0.07s)
+      1.36 ms ± 101 μs, 1.00x
   Read/write contention with 10000 iterations and 16 threads
     Counter:            OK (0.16s)
-      12.9 ms ± 1.1 ms
-    IORef inconsistent: OK (0.15s)
-      25.5 ms ± 2.2 ms
-    IORef atomic:       OK (8.01s)
-      515  ms ±  51 ms
-    MVar:               OK (1.57s)
-      501  ms ±  31 ms
-    TMVar:              OK (0.88s)
-      149  ms ±  11 ms
-    TVar:               OK (1.72s)
-      145  ms ± 1.1 ms
-    Addr:               OK (0.08s)
-      11.4 ms ± 480 μs
-  Read/write contention with 10 iterations and 20 threads
-    Counter:            OK (0.11s)
-      50.2 μs ± 4.9 μs
-    IORef inconsistent: OK (0.10s)
-      57.2 μs ± 3.8 μs
-    IORef atomic:       OK (0.35s)
-      192  μs ±  17 μs
-    MVar:               OK (0.26s)
-      533  μs ±  29 μs
-    TMVar:              OK (0.10s)
-      162  μs ±  14 μs
-    TVar:               OK (0.05s)
-      166  μs ±  11 μs
-    Addr:               OK (0.09s)
-      48.5 μs ± 3.3 μs
-  Read/write contention with 100 iterations and 20 threads
-    Counter:            OK (0.05s)
-      170  μs ±  14 μs
-    IORef inconsistent: OK (0.16s)
-      334  μs ±  11 μs
-    IORef atomic:       OK (0.53s)
-      1.44 ms ± 112 μs
-    MVar:               OK (0.35s)
-      5.29 ms ± 217 μs
-    TMVar:              OK (0.05s)
-      1.90 ms ± 114 μs
-    TVar:               OK (0.05s)
-      1.75 ms ± 111 μs
-    Addr:               OK (0.05s)
-      131  μs ±  11 μs
-  Read/write contention with 1000 iterations and 20 threads
-    Counter:            OK (0.18s)
-      1.73 ms ±  38 μs
-    IORef inconsistent: OK (0.04s)
-      3.06 ms ± 305 μs
-    IORef atomic:       OK (0.44s)
-      17.4 ms ± 797 μs
-    MVar:               OK (1.80s)
-      56.3 ms ± 1.3 ms
-    TMVar:              OK (0.44s)
-      18.7 ms ± 761 μs
-    TVar:               OK (0.05s)
-      18.3 ms ± 1.8 ms
-    Addr:               OK (0.05s)
-      1.72 ms ± 103 μs
-  Read/write contention with 10000 iterations and 20 threads
-    Counter:            OK (0.05s)
-      17.6 ms ± 1.2 ms
-    IORef inconsistent: OK (0.04s)
-      31.2 ms ± 1.8 ms
-    IORef atomic:       OK (10.54s)
-      659  ms ± 346 ms
-    MVar:               OK (1.96s)
-      627  ms ±  46 ms
-    TMVar:              OK (1.10s)
-      192  ms ± 9.0 ms
-    TVar:               OK (1.09s)
-      183  ms ±  16 ms
-    Addr:               OK (0.21s)
-      17.0 ms ± 260 μs
-  Read/write contention with 10 iterations and 32 threads
-    Counter:            OK (0.12s)
-      70.1 μs ± 2.7 μs
-    IORef inconsistent: OK (0.08s)
-      86.8 μs ± 7.5 μs
-    IORef atomic:       OK (0.95s)
-      183  μs ±  12 μs
-    MVar:               OK (0.23s)
-      913  μs ±  46 μs
-    TMVar:              OK (0.07s)
-      281  μs ±  15 μs
-    TVar:               OK (0.07s)
-      283  μs ±  20 μs
-    Addr:               OK (0.12s)
-      69.4 μs ± 3.2 μs
-  Read/write contention with 100 iterations and 32 threads
-    Counter:            OK (0.05s)
-      280  μs ±  27 μs
-    IORef inconsistent: OK (0.06s)
-      487  μs ±  37 μs
-    IORef atomic:       OK (0.07s)
-      1.89 ms ± 121 μs
-    MVar:               OK (0.57s)
-      8.50 ms ± 703 μs
-    TMVar:              OK (0.04s)
-      3.04 ms ± 280 μs
-    TVar:               OK (0.07s)
-      2.95 ms ± 175 μs
-    Addr:               OK (0.04s)
-      277  μs ±  26 μs
-  Read/write contention with 1000 iterations and 32 threads
-    Counter:            OK (0.08s)
-      2.75 ms ± 198 μs
-    IORef inconsistent: OK (0.03s)
-      5.20 ms ± 388 μs
-    IORef atomic:       OK (0.39s)
-      22.5 ms ± 809 μs
-    MVar:               OK (0.68s)
-      92.3 ms ± 4.3 ms
-    TMVar:              OK (0.18s)
-      31.4 ms ± 2.2 ms
-    TVar:               OK (0.09s)
-      30.0 ms ± 2.5 ms
-    Addr:               OK (0.04s)
-      2.85 ms ± 243 μs
-  Read/write contention with 10000 iterations and 32 threads
-    Counter:            OK (0.08s)
-      28.1 ms ± 708 μs
-    IORef inconsistent: OK (0.07s)
-      53.6 ms ± 1.4 ms
-    IORef atomic:       OK (9.80s)
-      1.223 s ± 410 ms
-    MVar:               OK (7.32s)
-      1.009 s ±  37 ms
-    TMVar:              OK (0.17s)
-      296  ms ±  23 ms
+      10.6 ms ± 651 μs
+    IORef inconsistent: OK (0.31s)
+      24.4 ms ± 1.1 ms, 2.30x
+    IORef atomic:       OK (1.23s)
+      755  ms ±  16 ms, 71.31x
+    MVar:               OK (1.33s)
+      446  ms ±  13 ms, 42.13x
+    TMVar:              OK (0.08s)
+      135  ms ±  12 ms, 12.80x
     TVar:               OK (1.76s)
-      302  ms ± 5.6 ms
-    Addr:               OK (0.08s)
-      29.1 ms ± 2.6 ms
-  Read/write contention with 10 iterations and 64 threads
-    Counter:            OK (0.05s)
-      127  μs ±  12 μs
-    IORef inconsistent: OK (0.12s)
-      158  μs ± 5.8 μs
-    IORef atomic:       OK (0.05s)
-      320  μs ±  29 μs
-    MVar:               OK (0.23s)
-      1.86 ms ± 145 μs
-    TMVar:              OK (1.06s)
-      529  μs ±  41 μs
-    TVar:               OK (0.26s)
-      569  μs ±  24 μs
-    Addr:               OK (0.06s)
-      125  μs ±  11 μs
-  Read/write contention with 100 iterations and 64 threads
-    Counter:            OK (0.04s)
-      564  μs ±  47 μs
-    IORef inconsistent: OK (0.04s)
-      1.03 ms ±  98 μs
-    IORef atomic:       OK (0.31s)
-      3.96 ms ± 240 μs
-    MVar:               OK (1.15s)
-      17.6 ms ± 1.3 ms
-    TMVar:              OK (0.30s)
-      6.30 ms ± 476 μs
-    TVar:               OK (0.30s)
-      6.28 ms ±  66 μs
-    Addr:               OK (0.06s)
-      560  μs ±  24 μs
-  Read/write contention with 1000 iterations and 64 threads
-    Counter:            OK (0.14s)
-      4.93 ms ±  91 μs
-    IORef inconsistent: OK (0.03s)
-      8.83 ms ± 711 μs
-    IORef atomic:       OK (6.68s)
-      110  ms ±  21 ms
-    MVar:               OK (1.34s)
-      188  ms ± 7.7 ms
-    TMVar:              OK (0.36s)
-      64.3 ms ± 4.0 ms
-    TVar:               OK (0.08s)
-      64.3 ms ± 2.3 ms
-    Addr:               OK (0.04s)
-      5.85 ms ± 457 μs
-  Read/write contention with 10000 iterations and 64 threads
-    Counter:            OK (0.08s)
-      59.1 ms ± 2.2 ms
-    IORef inconsistent: OK (0.14s)
-      102  ms ± 5.3 ms
-    IORef atomic:       OK (11.44s)
-      2.924 s ± 306 ms
-    MVar:               OK (6.17s)
-      1.982 s ±  34 ms
-    TMVar:              OK (0.35s)
-      657  ms ± 5.3 ms
-    TVar:               OK (3.62s)
-      631  ms ±  83 ms
-    Addr:               OK (0.03s)
-      47.7 ms ± 3.7 ms
-  Read/write contention with 10 iterations and 128 threads
-    Counter:            OK (0.08s)
-      232  μs ±  11 μs
-    IORef inconsistent: OK (0.12s)
-      322  μs ±  11 μs
-    IORef atomic:       OK (0.36s)
-      636  μs ±  14 μs
-    MVar:               OK (0.23s)
-      3.65 ms ± 264 μs
-    TMVar:              OK (1.04s)
-      1.07 ms ±  59 μs
-    TVar:               OK (0.07s)
-      1.09 ms ±  97 μs
-    Addr:               OK (0.05s)
-      227  μs ±  22 μs
-  Read/write contention with 100 iterations and 128 threads
-    Counter:            OK (0.04s)
-      1.16 ms ±  85 μs
-    IORef inconsistent: OK (0.03s)
-      2.08 ms ± 182 μs
-    IORef atomic:       OK (0.07s)
-      5.79 ms ± 393 μs
-    MVar:               OK (1.14s)
-      35.6 ms ± 1.1 ms
-    TMVar:              OK (0.62s)
-      13.1 ms ± 417 μs
-    TVar:               OK (0.07s)
-      10.4 ms ± 412 μs
-    Addr:               OK (0.13s)
-      1.10 ms ±  95 μs
-  Read/write contention with 1000 iterations and 128 threads
-    Counter:            OK (0.04s)
-      11.7 ms ± 1.2 ms
-    IORef inconsistent: OK (0.06s)
-      21.8 ms ± 2.0 ms
-    IORef atomic:       OK (10.69s)
-      318  ms ±  82 ms
-    MVar:               OK (5.87s)
-      373  ms ± 8.3 ms
-    TMVar:              OK (0.36s)
-      133  ms ± 4.1 ms
-    TVar:               OK (0.17s)
-      128  ms ± 8.6 ms
-    Addr:               OK (0.07s)
-      10.0 ms ± 504 μs
-  Read/write contention with 10000 iterations and 128 threads
-    Counter:            OK (0.33s)
-      119  ms ± 8.4 ms
-    IORef inconsistent: OK (0.28s)
-      210  ms ±  11 ms
-    IORef atomic:       OK (11.27s)
-      6.930 s ± 818 ms
-    MVar:               OK (12.48s)
-      3.977 s ±  43 ms
-    TMVar:              OK (3.52s)
-      1.316 s ±  11 ms
-    TVar:               OK (1.60s)
-      1.291 s ± 126 ms
+      150  ms ± 9.3 ms, 14.18x
     Addr:               OK (0.67s)
-      118  ms ± 3.0 ms
+      13.3 ms ± 344 μs, 1.25x
+  Read/write contention with 10 iterations and 20 threads
+    Counter:            OK (0.10s)
+      48.7 μs ± 2.7 μs
+    IORef inconsistent: OK (0.11s)
+      57.7 μs ± 3.4 μs, 1.18x
+    IORef atomic:       OK (1.28s)
+      185  μs ± 4.3 μs, 3.80x
+    MVar:               OK (0.14s)
+      548  μs ±  45 μs, 11.25x
+    TMVar:              OK (0.05s)
+      160  μs ±  11 μs, 3.28x
+    TVar:               OK (0.10s)
+      168  μs ± 6.2 μs, 3.44x
+    Addr:               OK (0.10s)
+      48.2 μs ± 3.7 μs, 0.99x
+  Read/write contention with 100 iterations and 20 threads
+    Counter:            OK (0.10s)
+      170  μs ± 8.4 μs
+    IORef inconsistent: OK (0.08s)
+      329  μs ±  17 μs, 1.93x
+    IORef atomic:       OK (0.34s)
+      1.85 ms ± 105 μs, 10.83x
+    MVar:               OK (0.36s)
+      5.37 ms ± 306 μs, 31.52x
+    TMVar:              OK (0.19s)
+      1.88 ms ± 120 μs, 11.01x
+    TVar:               OK (0.09s)
+      1.82 ms ± 129 μs, 10.69x
+    Addr:               OK (0.05s)
+      165  μs ±  15 μs, 0.97x
+  Read/write contention with 1000 iterations and 20 threads
+    Counter:            OK (0.06s)
+      1.28 ms ±  86 μs
+    IORef inconsistent: OK (0.32s)
+      3.25 ms ± 260 μs, 2.53x
+    IORef atomic:       OK (9.51s)
+      21.7 ms ± 2.8 ms, 16.88x
+    MVar:               OK (0.88s)
+      57.9 ms ± 686 μs, 45.07x
+    TMVar:              OK (0.22s)
+      18.7 ms ± 1.2 ms, 14.56x
+    TVar:               OK (0.22s)
+      17.7 ms ± 692 μs, 13.78x
+    Addr:               OK (0.05s)
+      1.71 ms ± 103 μs, 1.33x
+  Read/write contention with 10000 iterations and 20 threads
+    Counter:            OK (0.10s)
+      17.1 ms ± 1.7 ms
+    IORef inconsistent: OK (0.10s)
+      31.9 ms ± 1.2 ms, 1.86x
+    IORef atomic:       OK (1.72s)
+      546  ms ±  27 ms, 31.92x
+    MVar:               OK (1.92s)
+      626  ms ±  48 ms, 36.57x
+    TMVar:              OK (0.56s)
+      191  ms ± 2.1 ms, 11.18x
+    TVar:               OK (0.11s)
+      181  ms ± 7.1 ms, 10.55x
+    Addr:               OK (0.10s)
+      16.4 ms ± 607 μs, 0.96x
+  Read/write contention with 10 iterations and 32 threads
+    Counter:            OK (0.13s)
+      69.9 μs ± 3.9 μs
+    IORef inconsistent: OK (0.15s)
+      87.7 μs ± 4.1 μs, 1.25x
+    IORef atomic:       OK (0.50s)
+      185  μs ± 2.4 μs, 2.65x
+    MVar:               OK (0.13s)
+      923  μs ±  88 μs, 13.20x
+    TMVar:              OK (0.13s)
+      273  μs ±  14 μs, 3.90x
+    TVar:               OK (0.58s)
+      308  μs ±  24 μs, 4.41x
+    Addr:               OK (0.06s)
+      68.4 μs ± 5.9 μs, 0.98x
+  Read/write contention with 100 iterations and 32 threads
+    Counter:            OK (0.08s)
+      280  μs ±  15 μs
+    IORef inconsistent: OK (0.12s)
+      500  μs ±  18 μs, 1.79x
+    IORef atomic:       OK (0.46s)
+      1.69 ms ±  28 μs, 6.05x
+    MVar:               OK (0.58s)
+      8.82 ms ± 308 μs, 31.51x
+    TMVar:              OK (0.15s)
+      3.01 ms ± 214 μs, 10.75x
+    TVar:               OK (0.33s)
+      3.09 ms ± 111 μs, 11.04x
+    Addr:               OK (0.04s)
+      258  μs ±  23 μs, 0.92x
+  Read/write contention with 1000 iterations and 32 threads
+    Counter:            OK (0.29s)
+      2.82 ms ±  44 μs
+    IORef inconsistent: OK (0.14s)
+      5.04 ms ± 128 μs, 1.79x
+    IORef atomic:       OK (3.51s)
+      31.6 ms ± 2.7 ms, 11.22x
+    MVar:               OK (1.41s)
+      88.8 ms ± 6.3 ms, 31.49x
+    TMVar:              OK (0.08s)
+      29.6 ms ± 2.2 ms, 10.51x
+    TVar:               OK (0.09s)
+      32.4 ms ± 3.0 ms, 11.49x
+    Addr:               OK (0.08s)
+      2.25 ms ± 154 μs, 0.80x
+  Read/write contention with 10000 iterations and 32 threads
+    Counter:            OK (0.16s)
+      24.5 ms ± 1.8 ms
+    IORef inconsistent: OK (0.15s)
+      51.2 ms ± 3.3 ms, 2.09x
+    IORef atomic:       OK (10.26s)
+      1.292 s ± 657 ms, 52.67x
+    MVar:               OK (3.08s)
+      976  ms ±  51 ms, 39.78x
+    TMVar:              OK (0.41s)
+      329  ms ± 2.9 ms, 13.42x
+    TVar:               OK (0.18s)
+      311  ms ± 3.1 ms, 12.69x
+    Addr:               OK (0.17s)
+      24.8 ms ± 2.2 ms, 1.01x
+  Read/write contention with 10 iterations and 64 threads
+    Counter:            OK (0.10s)
+      125  μs ± 7.6 μs
+    IORef inconsistent: OK (0.06s)
+      158  μs ±  13 μs, 1.26x
+    IORef atomic:       OK (0.10s)
+      307  μs ±  12 μs, 2.46x
+    MVar:               OK (0.12s)
+      1.88 ms ± 179 μs, 15.03x
+    TMVar:              OK (0.25s)
+      555  μs ±  13 μs, 4.44x
+    TVar:               OK (0.14s)
+      538  μs ±  12 μs, 4.31x
+    Addr:               OK (0.06s)
+      122  μs ±  12 μs, 0.98x
+  Read/write contention with 100 iterations and 64 threads
+    Counter:            OK (0.07s)
+      566  μs ±  28 μs
+    IORef inconsistent: OK (0.07s)
+      1.04 ms ±  44 μs, 1.83x
+    IORef atomic:       OK (0.58s)
+      3.64 ms ± 107 μs, 6.44x
+    MVar:               OK (0.12s)
+      16.7 ms ± 1.5 ms, 29.58x
+    TMVar:              OK (0.15s)
+      6.21 ms ± 213 μs, 10.97x
+    TVar:               OK (0.15s)
+      6.07 ms ± 175 μs, 10.74x
+    Addr:               OK (0.07s)
+      556  μs ±  43 μs, 0.98x
+  Read/write contention with 1000 iterations and 64 threads
+    Counter:            OK (0.15s)
+      5.96 ms ± 302 μs
+    IORef inconsistent: OK (0.13s)
+      10.6 ms ± 514 μs, 1.77x
+    IORef atomic:       OK (1.27s)
+      100  ms ± 2.7 ms, 16.80x
+    MVar:               OK (1.33s)
+      188  ms ± 6.1 ms, 31.47x
+    TMVar:              OK (0.18s)
+      64.5 ms ± 1.1 ms, 10.83x
+    TVar:               OK (0.18s)
+      63.8 ms ± 4.2 ms, 10.70x
+    Addr:               OK (0.07s)
+      5.89 ms ± 510 μs, 0.99x
+  Read/write contention with 10000 iterations and 64 threads
+    Counter:            OK (0.17s)
+      58.3 ms ± 4.6 ms
+    IORef inconsistent: OK (0.29s)
+      105  ms ± 6.9 ms, 1.79x
+    IORef atomic:       OK (11.68s)
+      3.061 s ± 627 ms, 52.46x
+    MVar:               OK (6.29s)
+      2.002 s ± 104 ms, 34.31x
+    TMVar:              OK (1.73s)
+      632  ms ± 1.0 ms, 10.84x
+    TVar:               OK (0.82s)
+      654  ms ±  49 ms, 11.21x
+    Addr:               OK (0.17s)
+      58.7 ms ± 4.6 ms, 1.01x
+  Read/write contention with 10 iterations and 128 threads
+    Counter:            OK (0.09s)
+      228  μs ±  22 μs
+    IORef inconsistent: OK (0.11s)
+      310  μs ±  22 μs, 1.36x
+    IORef atomic:       OK (0.09s)
+      632  μs ±  49 μs, 2.78x
+    MVar:               OK (0.12s)
+      3.77 ms ± 372 μs, 16.54x
+    TMVar:              OK (0.04s)
+      1.07 ms ±  94 μs, 4.70x
+    TVar:               OK (0.51s)
+      1.04 ms ±  20 μs, 4.55x
+    Addr:               OK (0.08s)
+      220  μs ±  14 μs, 0.97x
+  Read/write contention with 100 iterations and 128 threads
+    Counter:            OK (0.26s)
+      1.15 ms ±  27 μs
+    IORef inconsistent: OK (0.13s)
+      2.05 ms ± 117 μs, 1.78x
+    IORef atomic:       OK (0.35s)
+      8.17 ms ± 736 μs, 7.09x
+    MVar:               OK (1.12s)
+      34.8 ms ± 1.4 ms, 30.25x
+    TMVar:              OK (0.15s)
+      12.9 ms ± 761 μs, 11.16x
+    TVar:               OK (0.15s)
+      13.3 ms ± 1.3 ms, 11.54x
+    Addr:               OK (0.07s)
+      1.12 ms ±  62 μs, 0.97x
+  Read/write contention with 1000 iterations and 128 threads
+    Counter:            OK (0.57s)
+      11.8 ms ± 184 μs
+    IORef inconsistent: OK (0.07s)
+      17.5 ms ± 1.6 ms, 1.48x
+    IORef atomic:       OK (8.50s)
+      266  ms ± 173 ms, 22.55x
+    MVar:               OK (1.12s)
+      367  ms ±  17 ms, 31.14x
+    TMVar:              OK (0.36s)
+      136  ms ±  12 ms, 11.54x
+    TVar:               OK (0.72s)
+      128  ms ±  12 ms, 10.87x
+    Addr:               OK (2.23s)
+      11.5 ms ± 522 μs, 0.98x
+  Read/write contention with 10000 iterations and 128 threads
+    Counter:            OK (0.68s)
+      116  ms ± 3.7 ms
+    IORef inconsistent: OK (0.27s)
+      211  ms ± 1.8 ms, 1.82x
+    IORef atomic:       OK (10.67s)
+      6.495 s ± 1.45 s, 56.11x
+    MVar:               OK (12.25s)
+      3.909 s ± 296 ms, 33.77x
+    TMVar:              OK (1.63s)
+      1.280 s ± 127 ms, 11.06x
+    TVar:               OK (0.72s)
+      1.323 s ±  46 ms, 11.43x
+    Addr:               OK (0.16s)
+      122  ms ± 7.8 ms, 1.05x
 
-All 309 tests passed (264.24s)
+All 309 tests passed (267.00s)
+
 ```
 
 # Memory overhead
