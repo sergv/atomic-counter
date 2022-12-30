@@ -26,6 +26,7 @@ import GHC.IO
 import Test.QuickCheck
 import Test.Tasty
 import Test.Tasty.Bench
+import Test.Tasty.Patterns.Printer
 import Test.Tasty.QuickCheck qualified as QC
 import Test.Tasty.Runners qualified as Tasty
 
@@ -110,9 +111,9 @@ main = do
                 g === expected
         ]
 
-  let benchmarks =
+  let benchmarks = map (mapLeafBenchmarks addCompare)
         [ bgroup ("Read/write contention with " ++ show (unIterations n) ++ " iterations and " ++ show (length threads) ++ " threads")
-          [ bench "Counter" $
+          [ bench counterBenchName $
             whnfIO (spawnAndCall threads (C.new 0)      (\ref _ -> callN n (incrementCounter ref 1)))
           , bench "IORef inconsistent" $
             whnfIO (spawnAndCall threads (newIORef 0)   (\ref _ -> callN n (incrementIORefInconsistent ref 1)))
@@ -143,3 +144,12 @@ main = do
     localOption (Tasty.NumThreads 1) $
       testGroup "All" $
       tests ++ benchmarks
+
+counterBenchName :: String
+counterBenchName = "Counter"
+
+addCompare :: ([String] -> Benchmark -> Benchmark)
+addCompare (name : path)
+  | name /= counterBenchName
+  = bcompare (printAwkExpr (locateBenchmark (counterBenchName : path)))
+addCompare _ = id
