@@ -1,4 +1,6 @@
-## Synopsis
+[![build](https://github.com/sergv/atomic-counter/actions/workflows/haskell-ci.yaml/badge.svg)](https://github.com/sergv/atomic-counter/actions/workflows/haskell-ci.yaml)
+
+# Synopsis
 
 Mutable cells that hold an integer value and can be safely modified from
 multiple threads. Support only few operations: read, write, +, -, and
