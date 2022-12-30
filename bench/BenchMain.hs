@@ -7,6 +7,7 @@
 ----------------------------------------------------------------------------
 
 {-# LANGUAGE BangPatterns        #-}
+{-# LANGUAGE CPP                 #-}
 {-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE MagicHash           #-}
 {-# LANGUAGE NamedFieldPuns      #-}
@@ -32,6 +33,7 @@ import Control.Concurrent.Counter.Lifted.IO qualified as C
 
 import TestUtils
 
+#if MIN_VERSION_base(4, 16, 0)
 readAddr :: Addr# -> Word
 readAddr addr = W# (indexWordOffAddr# addr 0#)
 
@@ -47,6 +49,7 @@ withAddr f = IO $ \s1 -> case newPinnedByteArray# (sizeOf# (undefined :: Word)) 
 incrementAddr :: Addr# -> Int -> IO ()
 incrementAddr addr (I# delta) = IO $ \s1 -> case fetchAddWordAddr# addr (int2Word# delta) s1 of
   (# s2, _ #) -> (# s2, () #)
+#endif
 
 incrementIORef :: IORef Int -> Int -> IO ()
 incrementIORef !x !delta = atomicModifyIORef' x (\old -> (old + delta, ()))
@@ -85,16 +88,26 @@ main = do
               c <- spawnAndCall ts (newTMVarIO 0) (\ref t -> runThread t (\_ -> pure ()) (incrementTMVar ref)) >>= atomically . takeTMVar
               d <- spawnAndCall ts (newTVarIO 0)  (\ref t -> runThread t (\_ -> pure ()) (incrementTVar ref)) >>= atomically . readTVar
               -- e <- spawnAndCall ts (newIORef 0)   (\ref t -> runThread t (incrementIORefInconsistent ref *> sleep delay)) >>= readIORef
+#if MIN_VERSION_base(4, 16, 0)
               f <- withAddr $ \addr -> do
                 spawnAndCall ts (pure ()) (\() t -> runThread t (\_ -> pure ()) (incrementAddr addr))
                 evaluate (readAddr addr)
+#endif
 
               g <- spawnAndCall ts (C.new 0) (\ref t -> runThread t (\_ -> pure ()) (incrementCounter ref)) >>= C.get
 
               let Sum expected =
                     foldMap (\Thread{tIncrement, tIterations} -> Sum $ tIncrement * unIterations tIterations) ts
 
-              pure $ a === expected .&&. b === expected .&&. c === expected .&&. d === expected .&&. fromIntegral f === expected .&&. g === expected
+              pure $
+                a === expected .&&.
+                b === expected .&&.
+                c === expected .&&.
+                d === expected .&&.
+#if MIN_VERSION_base(4, 16, 0)
+                fromIntegral f === expected .&&.
+#endif
+                g === expected
         ]
 
   let benchmarks =
@@ -111,6 +124,7 @@ main = do
             whnfIO (spawnAndCall threads (newTMVarIO 0) (\ref _ -> callN n (incrementTMVar ref 1)))
           , bench "TVar" $
             whnfIO (spawnAndCall threads (newTVarIO 0)  (\ref _ -> callN n (incrementTVar ref 1)))
+#if MIN_VERSION_base(4, 16, 0)
           , bench "Addr" $
             whnfIO $ withAddr $ \addr -> do
               spawnAndCall
@@ -118,6 +132,7 @@ main = do
                 (pure ())
                 (\() _ -> callN n (incrementAddr addr 1))
               evaluate (readAddr addr)
+#endif
           ]
         | repeats <- [1, 2, 4, 6, 8, 12, 16, 20, 32, 64, 128]
         , let threads = [1..repeats]
