@@ -35,7 +35,7 @@ speed comparison purposes. All others do proper synchronization of
 increments between the threads. Current package is shown as `Counter`.
 
 ```
-$ cabal run --builddir /tmp/dist bench -- -j1 --timeout 30
+$ cabal run bench -- -j1 --timeout 30
 All
   Correctness:          OK (15.95s)
     +++ OK, passed 10000 tests.
