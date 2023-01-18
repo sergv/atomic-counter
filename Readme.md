@@ -8,10 +8,25 @@ bitwise and, or, xor and nand.
 
 Good use case is a shared counter that multiple threads increment.
 
-Operations translate to atomic CPU instructions which make these cells
-way faster that even vanilla `IORef`. Value inside the cell is unboxed
-which contributes to outperforming all other shared vars because they
-box the value they store. For integers boxing is especially bad.
+Operations translate to atomic CPU instructions which involve memory
+barrier. For limited set of operation this package provides in
+concurrent setting they tend to be faster than atomic modify operation
+on `IORef`s and other shared var types. Value inside the `Counter`
+type is unboxed which contributes to outperforming all other shared
+vars because they box the value they store. For integers boxing is
+especially bad.
+
+For single-threaded use case this package will likely not outperform
+vanilla `IORef`s or `STRef`s (it depends on whether GHC adds memory
+barrier for them or not, cf
+https://gitlab.haskell.org/ghc/ghc/-/issues/22764, if it does end up
+adding the same memory barrier then both this package and `IORef`
+should be equal). All in all, operations this package provides will
+incur guaranteed memory barrier which will serve no purpose in
+single-threaded settings so for that use case this package is probably
+not the best. The intended use of this package is in the concurrent
+setting where it does seem like a clear winner (please see benchmarks
+below).
 
 # Benchmark
 
