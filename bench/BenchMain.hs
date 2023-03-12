@@ -148,7 +148,7 @@ main = do
 counterBenchName :: String
 counterBenchName = "Counter"
 
-addCompare :: ([String] -> Benchmark -> Benchmark)
+addCompare :: [String] -> Benchmark -> Benchmark
 addCompare (name : path)
   | name /= counterBenchName
   = bcompare (printAwkExpr (locateBenchmark (counterBenchName : path)))
