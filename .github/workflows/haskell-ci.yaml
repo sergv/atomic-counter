@@ -48,6 +48,7 @@ jobs:
         cd atomic-counter-*/
         cabal build all --enable-tests
         cabal test --enable-tests --test-show-details=direct all
+        cabal bench --enable-benchmarks --benchmark-options='--stdev 100 --timeout 100' all
     - name: Haddock
       run: |
         cd atomic-counter-*/
