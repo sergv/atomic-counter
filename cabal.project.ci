@@ -1,0 +1,8 @@
+packages:
+  atomic-counter.cabal
+
+tests: True
+benchmarks: True
+
+constraints:
+  atomic-counter +dev

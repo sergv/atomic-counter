@@ -12,7 +12,7 @@ jobs:
     name: GHC ${{ matrix.ghc }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         ghc:
@@ -32,6 +32,7 @@ jobs:
       id: setup-haskell-cabal
       with:
         ghc-version: ${{ matrix.ghc }}
+        cabal-update: true
     - uses: actions/cache@v2
       name: Cache cabal stuff
       with:
@@ -47,9 +48,9 @@ jobs:
         cabal sdist --ignore-project --output-directory .
         cabal get atomic-counter-*.tar.gz
         cd atomic-counter-*/
-        cabal build all --enable-tests
-        cabal test --enable-tests --test-show-details=direct all
-        cabal bench --enable-benchmarks --benchmark-options='--stdev 100 --timeout 100' all
+        cabal build --project-file cabal.project.ci all --enable-tests
+        cabal test --project-file cabal.project.ci --enable-tests --test-show-details=direct all
+        cabal bench --project-file cabal.project.ci --enable-benchmarks --benchmark-options='--stdev 100 --timeout 100' all
     - name: Haddock
       run: |
         cd atomic-counter-*/
