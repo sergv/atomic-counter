@@ -43,6 +43,14 @@ source-repository head
   type: git
   location: https://github.com/sergv/atomic-counter.git
 
+flag dev
+  description:
+    Enable development flags
+  default:
+    False
+  manual:
+    True
+
 common ghc-options
   default-language:
     Haskell2010
@@ -79,9 +87,13 @@ library
   build-depends:
     , base >= 4.14 && < 5
   if impl(ghc >= 9.4) && !arch(javascript)
-    cmm-sources: Counter.cmm
-    ghc-options: -dcmm-lint
-    cpp-options: -DUSE_CMM
+    cmm-sources:
+      Counter.cmm
+    cpp-options:
+      -DUSE_CMM
+    if flag(dev)
+      ghc-options:
+        -dcmm-lint
 
 library test-utils
   import: ghc-options
@@ -138,4 +150,3 @@ benchmark bench
     -threaded
     "-with-rtsopts=-N -A32M"
     -main-is BenchMain
-
