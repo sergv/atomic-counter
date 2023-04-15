@@ -75,7 +75,7 @@ set
   -> Int
   -> ST s ()
 set (Counter c) (I# x) = ST $ \s1 -> case Unlifted.set c x s1 of
-  s2 -> (# s2, () #)
+  (# s2 #) -> (# s2, () #)
 
 
 {-# INLINE add #-}

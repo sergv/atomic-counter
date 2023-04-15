@@ -16,10 +16,13 @@
 -- 'Control.Concurrent.Counter.Counter' module.
 ----------------------------------------------------------------------------
 
-{-# LANGUAGE CPP              #-}
-{-# LANGUAGE MagicHash        #-}
-{-# LANGUAGE UnboxedTuples    #-}
-{-# LANGUAGE UnliftedNewtypes #-}
+{-# LANGUAGE CPP                  #-}
+{-# LANGUAGE GHCForeignImportPrim #-}
+{-# LANGUAGE KindSignatures       #-}
+{-# LANGUAGE MagicHash            #-}
+{-# LANGUAGE UnboxedTuples        #-}
+{-# LANGUAGE UnliftedFFITypes     #-}
+{-# LANGUAGE UnliftedNewtypes     #-}
 
 module Control.Concurrent.Counter.Unlifted
   ( Counter
@@ -56,6 +59,54 @@ import GHC.Exts
 
 #define ADD_HASH(x) x#
 
+#if defined(USE_CMM) && SIZEOF_HSINT == 8
+
+-- | Memory location that supports select few atomic operations.
+newtype Counter s = Counter (Any :: UnliftedType)
+
+-- | Create new counter with initial value.
+foreign import prim "stg_newCounterzh"
+  new :: Int# -> State# s -> (# State# s, Counter s #)
+
+-- | Atomically read the counter's value.
+foreign import prim "stg_atomicGetCounterzh"
+  get :: Counter s -> State# s -> (# State# s, Int# #)
+
+-- | Atomically assign new value to the counter.
+foreign import prim "stg_atomicSetCounterzh"
+  set :: Counter s -> Int# -> State# s -> (# State# s #)
+
+-- | Atomically add an amount to the counter and return its old value.
+foreign import prim "stg_atomicAddCounterzh"
+  add :: Counter s -> Int# -> State# s -> (# State# s, Int# #)
+
+-- | Atomically subtract an amount from the counter and return its old value.
+foreign import prim "stg_atomicSubCounterzh"
+  sub :: Counter s -> Int# -> State# s -> (# State# s, Int# #)
+
+-- | Atomically combine old value with a new one via bitwise and. Returns old counter value.
+foreign import prim "stg_atomicAndCounterzh"
+  and :: Counter s -> Int# -> State# s -> (# State# s, Int# #)
+
+-- | Atomically combine old value with a new one via bitwise or. Returns old counter value.
+foreign import prim "stg_atomicOrCounterzh"
+  or :: Counter s -> Int# -> State# s -> (# State# s, Int# #)
+
+-- | Atomically combine old value with a new one via bitwise xor. Returns old counter value.
+foreign import prim "stg_atomicXorCounterzh"
+  xor :: Counter s -> Int# -> State# s -> (# State# s, Int# #)
+
+-- | Atomically combine old value with a new one via bitwise nand. Returns old counter value.
+foreign import prim "stg_atomicNandCounterzh"
+  nand :: Counter s -> Int# -> State# s -> (# State# s, Int# #)
+
+-- | Compare the underlying pointers of two counters.
+sameCounter :: Counter s -> Counter s -> Bool
+sameCounter (Counter x) (Counter y) =
+  isTrue# (reallyUnsafePtrEquality# x y)
+
+#else
+
 -- | Memory location that supports select few atomic operations.
 newtype Counter s = Counter (MutableByteArray# s)
 
@@ -75,8 +126,9 @@ get (Counter arr) = atomicReadIntArray# arr 0#
 
 {-# INLINE set #-}
 -- | Atomically assign new value to the counter.
-set :: Counter s -> Int# -> State# s -> State# s
-set (Counter arr) = atomicWriteIntArray# arr 0#
+set :: Counter s -> Int# -> State# s -> (# State# s #)
+set (Counter arr) n = \s1 -> case atomicWriteIntArray# arr 0# n s1 of
+  s2 -> (# s2 #)
 
 
 {-# INLINE add #-}
@@ -115,3 +167,5 @@ nand (Counter arr) = fetchNandIntArray# arr 0#
 sameCounter :: Counter s -> Counter s -> Bool
 sameCounter (Counter x) (Counter y) =
   isTrue# (sameMutableByteArray# x y)
+
+#endif

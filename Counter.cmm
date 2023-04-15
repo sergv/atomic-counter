@@ -1,0 +1,96 @@
+#include "Cmm.h"
+
+INFO_TABLE(stg_Counter, 0, 1, MUT_PRIM, "Counter", "Counter") ()
+{
+  foreign "C" barf("stg_Counter entered!", NULL) never returns;
+}
+
+stg_newCounterzh (W_ x)
+{
+  P_ c;
+  ("ptr" c) = ccall allocate(MyCapability() "ptr", BYTES_TO_WDS(SIZEOF_StgHeader + WDS(1)));
+  SET_HDR(c, stg_Counter_info, CCCS);
+  W_[c + SIZEOF_StgHeader] = x;
+  return (c);
+}
+
+stg_atomicGetCounterzh (P_ c)
+{
+  W_ x;
+  // load_seqcst64 is available since GHC 9.4
+  (x) = prim %load_seqcst64(c + SIZEOF_StgHeader);
+  return (x);
+}
+
+stg_atomicSetCounterzh (P_ c, W_ x)
+{
+  // store_seqcst64 is available since GHC 9.4
+  prim %store_seqcst64(c + SIZEOF_StgHeader, x);
+  return ();
+}
+
+stg_atomicAddCounterzh (P_ c, W_ x)
+{
+  W_ y;
+#if __GLASGOW_HASKELL__ >= 907
+  (y) = prim %fetch_add64(c + SIZEOF_StgHeader, x);
+#else
+  (y) = ccall hs_atomic_add64(c + SIZEOF_StgHeader, x);
+#endif
+  return (y);
+}
+
+stg_atomicSubCounterzh (P_ c, W_ x)
+{
+  W_ y;
+#if __GLASGOW_HASKELL__ >= 907
+  (y) = prim %fetch_sub64(c + SIZEOF_StgHeader, x);
+#else
+  (y) = ccall hs_atomic_sub64(c + SIZEOF_StgHeader, x);
+#endif
+  return (y);
+}
+
+stg_atomicAndCounterzh (P_ c, W_ x)
+{
+  W_ y;
+#if __GLASGOW_HASKELL__ >= 907
+  (y) = prim %fetch_and64(c + SIZEOF_StgHeader, x);
+#else
+  (y) = ccall hs_atomic_and64(c + SIZEOF_StgHeader, x);
+#endif
+  return (y);
+}
+
+stg_atomicOrCounterzh (P_ c, W_ x)
+{
+  W_ y;
+#if __GLASGOW_HASKELL__ >= 907
+  (y) = prim %fetch_or64(c + SIZEOF_StgHeader, x);
+#else
+  (y) = ccall hs_atomic_or64(c + SIZEOF_StgHeader, x);
+#endif
+  return (y);
+}
+
+stg_atomicXorCounterzh (P_ c, W_ x)
+{
+  W_ y;
+#if __GLASGOW_HASKELL__ >= 907
+  (y) = prim %fetch_xor64(c + SIZEOF_StgHeader, x);
+#else
+  (y) = ccall hs_atomic_xor64(c + SIZEOF_StgHeader, x);
+#endif
+  return (y);
+}
+
+stg_atomicNandCounterzh (P_ c, W_ x)
+{
+  W_ y;
+#if __GLASGOW_HASKELL__ >= 907
+  (y) = prim %fetch_nand64(c + SIZEOF_StgHeader, x);
+#else
+  (y) = ccall hs_atomic_nand64(c + SIZEOF_StgHeader, x);
+#endif
+  return (y);
+}

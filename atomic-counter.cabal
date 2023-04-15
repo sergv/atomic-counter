@@ -78,6 +78,10 @@ library
     src
   build-depends:
     , base >= 4.14 && < 5
+  if impl(ghc >= 9.4) && !arch(javascript)
+    cmm-sources: Counter.cmm
+    ghc-options: -dcmm-lint
+    cpp-options: -DUSE_CMM
 
 library test-utils
   import: ghc-options
