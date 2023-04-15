@@ -38,6 +38,8 @@ extra-source-files:
 
 homepage:
   https://github.com/sergv/atomic-counter
+bug-reports:
+  https://github.com/sergv/atomic-counter/issues
 
 source-repository head
   type: git
