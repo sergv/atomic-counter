@@ -144,7 +144,7 @@ benchmark bench
     , primitive
     , stm
     , tasty >= 1.4.2
-    , tasty-bench >= 0.3.2
+    , tasty-bench >= 0.3.4
     , tasty-quickcheck
     , test-utils
   ghc-options:

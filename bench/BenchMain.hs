@@ -24,11 +24,10 @@ import Data.Semigroup
 import GHC.Exts
 import GHC.IO
 import Test.QuickCheck
-import Test.Tasty
+import Test.Tasty hiding (defaultMain)
 import Test.Tasty.Bench
 import Test.Tasty.Patterns.Printer
 import Test.Tasty.QuickCheck qualified as QC
-import Test.Tasty.Runners qualified as Tasty
 
 import Control.Concurrent.Counter.Lifted.IO qualified as C
 
@@ -140,10 +139,7 @@ main = do
         , n <- [Iterations 10, Iterations 100, Iterations 1000, Iterations 10000]
         ]
 
-  defaultMainWithIngredients benchIngredients $
-    localOption (Tasty.NumThreads 1) $
-      testGroup "All" $
-      tests ++ benchmarks
+  defaultMain $ tests ++ benchmarks
 
 counterBenchName :: String
 counterBenchName = "Counter"
