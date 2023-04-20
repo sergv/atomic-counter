@@ -33,6 +33,7 @@ module Control.Concurrent.Counter.Unlifted
   -- * Read/write
   , get
   , set
+  , cas
 
   -- * Arithmetic operations
   , add
@@ -46,6 +47,7 @@ module Control.Concurrent.Counter.Unlifted
 
   -- * Compare
   , sameCounter
+
   ) where
 
 import Prelude hiding (and, or)
@@ -100,6 +102,12 @@ foreign import prim "stg_atomicXorCounterzh"
 foreign import prim "stg_atomicNandCounterzh"
   nand :: Counter s -> Int# -> State# s -> (# State# s, Int# #)
 
+-- | Atomic compare and swap, i.e. write the new value if the current
+-- value matches the provided old value. Returns the value of the
+-- element before the operation
+foreign import prim "stg_casCounterzh"
+  cas :: Counter s -> Int# -> Int# -> State# s -> (# State# s, Int# #)
+
 -- | Compare the underlying pointers of two counters.
 sameCounter :: Counter s -> Counter s -> Bool
 sameCounter (Counter x) (Counter y) =
@@ -130,6 +138,17 @@ set :: Counter s -> Int# -> State# s -> (# State# s #)
 set (Counter arr) n = \s1 -> case atomicWriteIntArray# arr 0# n s1 of
   s2 -> (# s2 #)
 
+{-# INLINE cas #-}
+-- | Atomic compare and swap, i.e. write the new value if the current
+-- value matches the provided old value. Returns the value of the
+-- element before the operation
+cas
+  :: Counter s
+  -> Int# -- ^ Expected old value
+  -> Int# -- ^ New value
+  -> State# s
+  -> (# State# s, Int# #)
+cas (Counter arr) = casIntArray# arr 0#
 
 {-# INLINE add #-}
 -- | Atomically add an amount to the counter and return its old value.
@@ -161,7 +180,6 @@ xor (Counter arr) = fetchXorIntArray# arr 0#
 -- | Atomically combine old value with a new one via bitwise nand. Returns old counter value.
 nand :: Counter s -> Int# -> State# s -> (# State# s, Int# #)
 nand (Counter arr) = fetchNandIntArray# arr 0#
-
 
 -- | Compare the underlying pointers of two counters.
 sameCounter :: Counter s -> Counter s -> Bool

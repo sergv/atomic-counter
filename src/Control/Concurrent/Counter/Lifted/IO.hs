@@ -21,6 +21,7 @@ module Control.Concurrent.Counter.Lifted.IO
   -- * Read/write
   , get
   , set
+  , cas
 
   -- * Arithmetic operations
   , add
@@ -68,6 +69,16 @@ get = coerce Lifted.get
 set :: Counter -> Int -> IO ()
 set = coerce Lifted.set
 
+{-# INLINE cas #-}
+-- | Atomic compare and swap, i.e. write the new value if the current
+-- value matches the provided old value. Returns the value of the
+-- element before the operation
+cas
+  :: Counter
+  -> Int -- ^ Expected old value
+  -> Int -- ^ New value
+  -> IO Int
+cas = coerce Lifted.cas
 
 {-# INLINE add #-}
 -- | Atomically add an amount to the counter and return its old value.

@@ -94,3 +94,10 @@ stg_atomicNandCounterzh (P_ c, W_ x)
 #endif
   return (y);
 }
+
+stg_casCounterzh (P_ c, W_ x, W_ y)
+{
+  W_ z;
+  (z) = prim %cmpxchg64(c + SIZEOF_StgHeader, x, y);
+  return (z);
+}

@@ -23,6 +23,7 @@ module Control.Concurrent.Counter.Lifted.ST
   -- * Read/write
   , get
   , set
+  , cas
 
   -- * Arithmetic operations
   , add
@@ -77,6 +78,17 @@ set
 set (Counter c) (I# x) = ST $ \s1 -> case Unlifted.set c x s1 of
   (# s2 #) -> (# s2, () #)
 
+{-# INLINE cas #-}
+-- | Atomic compare and swap, i.e. write the new value if the current
+-- value matches the provided old value. Returns the value of the
+-- element before the operation
+cas
+  :: Counter s
+  -> Int -- ^ Expected old value
+  -> Int -- ^ New value
+  -> ST s Int
+cas (Counter c) (I# x) (I# y) = ST $ \s1 -> case Unlifted.cas c x y s1 of
+  (# s2, z #) -> (# s2, I# z #)
 
 {-# INLINE add #-}
 -- | Atomically add an amount to the counter and return its old value.
