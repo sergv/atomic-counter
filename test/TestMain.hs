@@ -11,20 +11,20 @@
 
 module TestMain (main) where
 
+import Control.Concurrent
 import Data.Semigroup
 import Test.QuickCheck
 import Test.Tasty
 import Test.Tasty.QuickCheck qualified as QC
-import Test.Tasty.Runners qualified as Tasty
 
 import Control.Concurrent.Counter.Lifted.IO qualified as C
 
 import TestUtils
 
 main :: IO ()
-main = defaultMain $
-  localOption (Tasty.NumThreads 1) $
-  testGroup "All"
+main = do
+  setNumCapabilities 1
+  defaultMain $ testGroup "All"
     [ adjustOption (\(QC.QuickCheckTests x) -> QC.QuickCheckTests (max x 500)) $
       QC.testProperty "Correctness" $
         \(Threads ts) -> ioProperty $ do
