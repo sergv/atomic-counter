@@ -18,8 +18,8 @@ jobs:
         ghc:
           - "8.10.7"
           - "9.0.2"
-          - "9.2.5"
-          - "9.4.4"
+          - "9.2.7"
+          - "9.4.5"
           - "9.6.1"
         include:
         - os: macOS-latest
@@ -43,15 +43,25 @@ jobs:
     - name: Cabal version
       run: |
         cabal --version
-    - name: Build & Test
+    - name: Build & Test default
       run: |
         cabal sdist --ignore-project --output-directory .
-        cabal get atomic-counter-*.tar.gz
-        cd atomic-counter-*/
-        cabal build --project-file cabal.project.ci all --enable-tests
-        cabal test --project-file cabal.project.ci --enable-tests --test-show-details=direct all
-        cabal bench --project-file cabal.project.ci --enable-benchmarks --benchmark-options='--stdev 100 --timeout 100' all
+        cabal get atomic-counter-*.tar.gz -d default
+        cd default/atomic-counter-*/
+        cabal build --project-file cabal.project.ci all
+        cabal test --project-file cabal.project.ci --test-show-details=direct all
+        cabal bench --project-file cabal.project.ci --benchmark-options='--stdev 100 --timeout 100' all
     - name: Haddock
       run: |
-        cd atomic-counter-*/
+        cd default/atomic-counter-*/
         cabal haddock all
+
+    - name: Build & Test no cmm
+      run: |
+        cabal sdist --ignore-project --output-directory .
+        cabal get atomic-counter-*.tar.gz -d no-cmm
+        cd no-cmm/atomic-counter-*/
+        cabal build --project-file cabal.project.ci --constraint "atomic-counter +no-cmm" all
+        cabal test --project-file cabal.project.ci --constraint "atomic-counter +no-cmm" --test-show-details=direct all
+        cabal bench --project-file cabal.project.ci --constraint "atomic-counter +no-cmm" --benchmark-options='--stdev 100 --timeout 100' all
+
