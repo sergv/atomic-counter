@@ -28,10 +28,11 @@ jobs:
           ghc: "9.6.1"
     steps:
     - uses: actions/checkout@v3
-    - uses: haskell/actions/setup@v2.0.2
+    - uses: haskell/actions/setup@v2.3.7
       id: setup-haskell-cabal
       with:
         ghc-version: ${{ matrix.ghc }}
+        cabal-version: "latest"
         cabal-update: true
     - uses: actions/cache@v2
       name: Cache cabal stuff
@@ -55,6 +56,10 @@ jobs:
       run: |
         cd default/atomic-counter-*/
         cabal haddock all
+    - name: Cabal check
+      run: |
+        cd default/atomic-counter-*/
+        cabal check
 
     - name: Build & Test no cmm
       run: |
