@@ -134,8 +134,8 @@ main = do
               evaluate (readAddr addr)
 #endif
           ]
-        | repeats <- [1, 2, 4, 6, 8, 12, 16, 20, 32, 64, 128]
-        , let threads = [1..repeats]
+        | maxThreads <- [1, 2, 4, 6, 8, 12, 16, 20, 32, 64, 128]
+        , let threads = [1..maxThreads]
         , n <- [Iterations 10, Iterations 100, Iterations 1000, Iterations 10000]
         ]
 
