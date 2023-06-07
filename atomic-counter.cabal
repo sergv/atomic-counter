@@ -98,7 +98,7 @@ library
     src
   build-depends:
     , base >= 4.14 && < 5
-  if impl(ghc >= 9.4) && !arch(javascript) && !flag(no-cmm)
+  if impl(ghc >= 9.4) && !arch(javascript) && !arch(i386) && !flag(no-cmm)
     cmm-sources:
       Counter.cmm
     cpp-options:
