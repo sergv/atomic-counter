@@ -1,3 +1,7 @@
+# 0.1.2.1
+
+- Disable cmm on 32 bit x86 architecture
+
 # 0.1.2
 
 - Add compare and swap operation
