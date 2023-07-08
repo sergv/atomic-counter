@@ -16,16 +16,16 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         ghc:
-          - "8.10.7"
-          - "9.0.2"
-          - "9.2.8"
-          - "9.4.5"
-          - "9.6.2"
+          - "8.10"
+          - "9.0"
+          - "9.2"
+          - "9.4"
+          - "9.6"
         include:
         - os: macOS-latest
-          ghc: "9.6.2"
+          ghc: "9.6"
         - os: windows-latest
-          ghc: "9.6.2"
+          ghc: "9.6"
     steps:
     - uses: actions/checkout@v3
     - uses: haskell/actions/setup@v2
@@ -44,31 +44,37 @@ jobs:
     - name: Cabal version
       run: |
         cabal --version
+    - name: Unpack
+      run: |
+        cabal sdist --ignore-project --output-directory ..
+        cd ..
+        cabal get atomic-counter-*.tar.gz -d default
+        cabal get atomic-counter-*.tar.gz -d no-cmm
     - name: Build & Test default
       run: |
-        cabal sdist --ignore-project --output-directory .
-        cabal get atomic-counter-*.tar.gz -d default
-        cd default/atomic-counter-*/
-        cabal build --project-file cabal.project.ci all
-        cabal test --project-file cabal.project.ci --test-show-details=direct all
-        cabal bench --project-file cabal.project.ci --benchmark-options='--stdev 100 --timeout 100' all
+        project_file="$(pwd)/cabal.project.ci"
+
+        cd ../default/atomic-counter-*/
+        cabal build --project-file "$project_file" all
+        cabal test --project-file "$project_file" --test-show-details=direct all
+        cabal bench --project-file "$project_file" --benchmark-options='--stdev 100 --timeout 100' all
     - name: Haddock
       run: |
-        cd default/atomic-counter-*/
+        cd ../default/atomic-counter-*/
         cabal haddock all
     - name: Cabal check
       run: |
-        cd default/atomic-counter-*/
+        cd ../default/atomic-counter-*/
         cabal check
 
     - name: Build & Test no cmm
       run: |
-        cabal sdist --ignore-project --output-directory .
-        cabal get atomic-counter-*.tar.gz -d no-cmm
-        cd no-cmm/atomic-counter-*/
-        cabal build --project-file cabal.project.ci --constraint "atomic-counter +no-cmm" all
-        cabal test --project-file cabal.project.ci --constraint "atomic-counter +no-cmm" --test-show-details=direct all
-        cabal bench --project-file cabal.project.ci --constraint "atomic-counter +no-cmm" --benchmark-options='--stdev 100 --timeout 100' all
+        project_file="$(pwd)/cabal.project.ci"
+
+        cd ../no-cmm/atomic-counter-*/
+        cabal build --project-file "$project_file" --constraint "atomic-counter +no-cmm" all
+        cabal test --project-file "$project_file" --constraint "atomic-counter +no-cmm" --test-show-details=direct all
+        cabal bench --project-file "$project_file" --constraint "atomic-counter +no-cmm" --benchmark-options='--stdev 100 --timeout 100' all
 
   i386:
     runs-on: ubuntu-latest
@@ -102,15 +108,24 @@ jobs:
       run: |
         source ~/.ghcup/env
         cabal --version
-    - name: Build & Test default
+    - name: Unpack
       run: |
         source ~/.ghcup/env
         cabal update
 
-        cabal sdist --ignore-project --output-directory .
+        cabal sdist --ignore-project --output-directory ..
+        cd ..
         cabal get atomic-counter-*.tar.gz -d default
-        cd default/atomic-counter-*/
-        cabal build --project-file cabal.project.ci all
-        cabal test --project-file cabal.project.ci --test-show-details=direct all
-        cabal bench --project-file cabal.project.ci --benchmark-options='--stdev 100 --timeout 100' all
+
+    - name: Build & Test default
+      run: |
+        source ~/.ghcup/env
+        cabal update
+        project_file="$(pwd)/cabal.project.ci"
+
+        cd ../default/atomic-counter-*/
+        cabal build --project-file "$project_file" all
+        cabal test --project-file "$project_file" --test-show-details=direct all
+
+        cabal bench --project-file "$project_file" --benchmark-options='--stdev 100 --timeout 100' all
 
