@@ -1,5 +1,7 @@
 #include "Cmm.h"
 
+#define SIZEOF_StgCounter (SIZEOF_StgHeader + WDS(1))
+
 INFO_TABLE(stg_Counter, 0, 1, MUT_PRIM, "Counter", "Counter") ()
 {
   foreign "C" barf("stg_Counter entered!", NULL) never returns;
@@ -8,7 +10,8 @@ INFO_TABLE(stg_Counter, 0, 1, MUT_PRIM, "Counter", "Counter") ()
 stg_newCounterzh (W_ x)
 {
   P_ c;
-  ("ptr" c) = ccall allocate(MyCapability() "ptr", BYTES_TO_WDS(SIZEOF_StgHeader + WDS(1)));
+  ALLOC_PRIM_N (SIZEOF_StgCounter, stg_newCounterzh, x);
+  c = Hp - SIZEOF_StgCounter + WDS(1);
   SET_HDR(c, stg_Counter_info, CCCS);
   W_[c + SIZEOF_StgHeader] = x;
   return (c);
