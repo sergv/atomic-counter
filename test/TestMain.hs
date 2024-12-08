@@ -7,7 +7,6 @@
 ----------------------------------------------------------------------------
 
 {-# LANGUAGE BangPatterns        #-}
-{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE NamedFieldPuns      #-}
 
 module TestMain (main) where
@@ -18,9 +17,9 @@ import Data.IORef
 import Data.Semigroup
 import Test.QuickCheck
 import Test.Tasty
-import Test.Tasty.QuickCheck qualified as QC
+import qualified Test.Tasty.QuickCheck as QC
 
-import Control.Concurrent.Counter.Lifted.IO qualified as C
+import qualified Control.Concurrent.Counter.Lifted.IO as C
 
 import TestUtils
 

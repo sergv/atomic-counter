@@ -8,7 +8,6 @@
 
 {-# LANGUAGE BangPatterns        #-}
 {-# LANGUAGE CPP                 #-}
-{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE MagicHash           #-}
 {-# LANGUAGE NamedFieldPuns      #-}
 {-# LANGUAGE UnboxedTuples       #-}
@@ -27,9 +26,9 @@ import Test.QuickCheck
 import Test.Tasty hiding (defaultMain)
 import Test.Tasty.Bench
 import Test.Tasty.Patterns.Printer
-import Test.Tasty.QuickCheck qualified as QC
+import qualified Test.Tasty.QuickCheck as QC
 
-import Control.Concurrent.Counter.Lifted.IO qualified as C
+import qualified Control.Concurrent.Counter.Lifted.IO as C
 
 import TestUtils
 

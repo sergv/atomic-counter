@@ -10,9 +10,8 @@
 -- same operation (terms and conditions apply).
 ----------------------------------------------------------------------------
 
-{-# LANGUAGE ImportQualifiedPost #-}
-{-# LANGUAGE MagicHash           #-}
-{-# LANGUAGE UnboxedTuples       #-}
+{-# LANGUAGE MagicHash     #-}
+{-# LANGUAGE UnboxedTuples #-}
 
 module Control.Concurrent.Counter.Lifted.ST
   ( Counter
@@ -41,8 +40,7 @@ import Prelude hiding (and, or)
 import GHC.Exts (Int(..), Int#, State#)
 import GHC.ST
 
-import Control.Concurrent.Counter.Unlifted qualified as Unlifted
-
+import qualified Control.Concurrent.Counter.Unlifted as Unlifted
 
 -- | Memory location that supports select few atomic operations.
 --

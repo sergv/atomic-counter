@@ -95,6 +95,7 @@ common ghc-options
   if impl(ghc >= 8.10)
     ghc-options:
       -Wno-missing-safe-haskell-mode
+      -Wno-prepositive-qualified-module
 
   if impl(ghc >= 9.2)
     ghc-options:

@@ -9,8 +9,7 @@
 -- operate in the 'IO' monad.
 ----------------------------------------------------------------------------
 
-{-# LANGUAGE ImportQualifiedPost #-}
-{-# LANGUAGE TypeApplications    #-}
+{-# LANGUAGE TypeApplications #-}
 
 module Control.Concurrent.Counter.Lifted.IO
   ( Counter
@@ -41,8 +40,7 @@ import GHC.Exts (RealWorld)
 import GHC.IO
 import GHC.ST
 
-import Control.Concurrent.Counter.Lifted.ST qualified as Lifted
-
+import qualified Control.Concurrent.Counter.Lifted.ST as Lifted
 
 -- | Memory location that supports select few atomic operations.
 --
