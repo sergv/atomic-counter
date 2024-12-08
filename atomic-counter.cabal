@@ -74,7 +74,6 @@ common ghc-options
     -Wno-missed-specialisations
     -Wno-missing-import-lists
     -Wno-missing-local-signatures
-    -Wno-missing-safe-haskell-mode
     -Wno-safe
     -Wno-type-defaults
     -Wno-unsafe
@@ -83,9 +82,18 @@ common ghc-options
     ghc-options:
       -Wno-missing-deriving-strategies
 
+  if impl(ghc >= 8.10)
+    ghc-options:
+      -Wno-missing-safe-haskell-mode
+
   if impl(ghc >= 9.2)
     ghc-options:
       -Wno-missing-kind-signatures
+
+  if impl(ghc >= 9.8)
+    ghc-options:
+      -Wno-missing-role-annotations
+      -Wno-missing-poly-kind-signatures
 
 library
   import: ghc-options
