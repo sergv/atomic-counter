@@ -115,7 +115,7 @@ library
   hs-source-dirs:
     src
   build-depends:
-    , base >= 4.14 && < 5
+    , base >= 4.12 && < 5
   if impl(ghc >= 9.4) && !arch(javascript) && !arch(i386) && !flag(no-cmm)
     cmm-sources:
       Counter.cmm
@@ -134,7 +134,7 @@ library test-utils
   build-depends:
     , QuickCheck
     , async >= 2
-    , base >= 4.14
+    , base >= 4.12
 
 test-suite test
   import: ghc-options
@@ -147,7 +147,7 @@ test-suite test
   build-depends:
     , QuickCheck
     , atomic-counter
-    , base >= 4.14
+    , base >= 4.12
     , tasty
     , tasty-quickcheck
     , test-utils
@@ -168,7 +168,7 @@ benchmark bench
   build-depends:
     , QuickCheck
     , atomic-counter
-    , base >= 4.14
+    , base >= 4.12
     , primitive
     , stm
     , tasty >= 1.4.2
