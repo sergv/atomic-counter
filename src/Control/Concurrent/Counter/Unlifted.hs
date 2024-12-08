@@ -22,7 +22,10 @@
 {-# LANGUAGE MagicHash            #-}
 {-# LANGUAGE UnboxedTuples        #-}
 {-# LANGUAGE UnliftedFFITypes     #-}
-{-# LANGUAGE UnliftedNewtypes     #-}
+
+#if __GLASGOW_HASKELL__ >= 810
+{-# LANGUAGE UnliftedNewtypes #-}
+#endif
 
 module Control.Concurrent.Counter.Unlifted
   ( Counter
@@ -113,10 +116,18 @@ sameCounter :: Counter s -> Counter s -> Bool
 sameCounter (Counter x) (Counter y) =
   isTrue# (reallyUnsafePtrEquality# x y)
 
-#else
+#endif
+
+#if !(defined(USE_CMM) && SIZEOF_HSINT == 8)
 
 -- | Memory location that supports select few atomic operations.
+#if __GLASGOW_HASKELL__ >= 810
 newtype Counter s = Counter (MutableByteArray# s)
+#endif
+
+#if !(__GLASGOW_HASKELL__ >= 810)
+data Counter s = Counter (MutableByteArray# s)
+#endif
 
 {-# INLINE new #-}
 -- | Create new counter with initial value.
