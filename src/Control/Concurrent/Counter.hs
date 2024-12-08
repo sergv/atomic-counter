@@ -10,7 +10,27 @@
 ----------------------------------------------------------------------------
 
 module Control.Concurrent.Counter
-  ( module Control.Concurrent.Counter.Lifted.IO
+  ( Counter
+
+  -- * Create
+  , new
+
+  -- * Read/write
+  , get
+  , set
+  , cas
+
+  -- * Arithmetic operations
+  , add
+  , sub
+
+  -- * Bitwise operations
+  , and
+  , or
+  , xor
+  , nand
   ) where
+
+import Prelude hiding (and, or)
 
 import Control.Concurrent.Counter.Lifted.IO
