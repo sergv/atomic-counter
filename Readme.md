@@ -28,6 +28,9 @@ not the best. The intended use of this package is in the concurrent
 setting where it does seem like a clear winner (please see benchmarks
 below).
 
+Still even is single-threaded scenario the `Counter` can serve as an
+efficient mutable integer cell that does not box the integer.
+
 # Benchmark
 
 ### Summary
@@ -720,8 +723,12 @@ All 309 tests passed (2397.33s)
 
 # Memory overhead
 
-Each unlifted value of type `Counter` is a singleton mutable array
-from GHC primitives under the hood. Thus it occupies at least
-`platform integer size` + `array size` + `header` bytes which should
-typically be at least 3 machine words. Lifted values may occupy more
-depending on optimizations.
+In pure Haskell (i.e. with `no-cmm` flag enabled) each unlifted value of
+type `Counter` is a singleton mutable array from GHC primitives under
+the hood. Thus it occupies at least `platform integer size` + `array
+size` + `header` bytes which should typically be at least 3 machine
+words. Lifted values may occupy more depending on optimizations.
+
+By default CMM will be enabled which should save one word of overhead
+because there would be no array any more hence no need to store
+trivial size.
