@@ -135,7 +135,7 @@ library test-utils
   build-depends:
     , QuickCheck
     , async >= 2
-    , base >= 4.12
+    , base >= 4.12 && < 5
 
 test-suite test
   import: ghc-options
