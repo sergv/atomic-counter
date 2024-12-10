@@ -1,3 +1,9 @@
+# 0.1.2.2
+
+- Lower minimum supported GHC to 8.6 and base to 4.12
+- Improve generated documentation
+- Faster `stg_newCounterzh`
+
 # 0.1.2.1
 
 - Disable cmm on 32 bit x86 architecture
