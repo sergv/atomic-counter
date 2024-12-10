@@ -128,6 +128,8 @@ library
 
 library test-utils
   import: ghc-options
+  visibility:
+    private
   exposed-modules:
     TestUtils
   hs-source-dirs:
@@ -151,7 +153,7 @@ test-suite test
     , base >= 4.12
     , tasty
     , tasty-quickcheck
-    , test-utils
+    , atomic-counter:test-utils
   ghc-options:
     -rtsopts
     -threaded
@@ -175,7 +177,7 @@ benchmark bench
     , tasty >= 1.4.2
     , tasty-bench >= 0.3.4
     , tasty-quickcheck
-    , test-utils
+    , atomic-counter:test-utils
   ghc-options:
     -rtsopts
     -threaded
