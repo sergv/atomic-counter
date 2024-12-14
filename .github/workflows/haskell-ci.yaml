@@ -31,29 +31,34 @@ jobs:
         - os: windows-latest
           ghc: "9.10"
     steps:
+
     - uses: actions/checkout@v4
+
     - uses: haskell-actions/setup@v2
       id: setup-haskell-cabal
       with:
         ghc-version: ${{ matrix.ghc }}
         cabal-version: "latest"
         cabal-update: true
+
     - uses: actions/cache@v4
-      name: Cache cabal stuff
+      name: Cache cabal store
       with:
-        path: |
-          ${{ steps.setup-haskell-cabal.outputs.cabal-store }}
-          dist-newstyle
-        key: ${{ runner.os }}-${{ matrix.ghc }}
+        path: ${{ steps.setup-haskell-cabal.outputs.cabal-store }}
+        key: ${{ runner.os }}-${{ matrix.ghc }}-${{ github.sha }}
+        restore-keys: ${{ runner.os }}-${{ matrix.ghc }}-
+
     - name: Cabal version
       run: |
         cabal --version
+
     - name: Unpack
       run: |
         cabal sdist --ignore-project --output-directory ..
         cd ..
         cabal get atomic-counter-*.tar.gz -d default
         cabal get atomic-counter-*.tar.gz -d no-cmm
+
     - name: Build & Test default
       run: |
         project_file="$(pwd)/cabal.project.ci"
@@ -62,10 +67,12 @@ jobs:
         cabal build --project-file "$project_file" all
         cabal test --project-file "$project_file" --test-show-details=direct all
         cabal bench --project-file "$project_file" --benchmark-options='--stdev 100 --timeout 100' all
+
     - name: Haddock
       run: |
         cd ../default/atomic-counter-*/
         cabal haddock all
+
     - name: Cabal check
       run: |
         cd ../default/atomic-counter-*/
