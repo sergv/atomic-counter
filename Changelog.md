@@ -1,3 +1,7 @@
+# 0.1.2.3
+
+- Remove internal ‘test-utils’ library which wasn’t supposed to be used by clients anyway but was confusing cabal dependency resolution
+
 # 0.1.2.2
 
 - Lower minimum supported GHC to 8.6 and base to 4.12
