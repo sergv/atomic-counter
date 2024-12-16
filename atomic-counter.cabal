@@ -126,34 +126,24 @@ library
       ghc-options:
         -dcmm-lint
 
-library test-utils
-  import: ghc-options
-  visibility:
-    private
-  exposed-modules:
-    TestUtils
-  hs-source-dirs:
-    test
-  build-depends:
-    , QuickCheck
-    , async >= 2
-    , base >= 4.12 && < 5
-
 test-suite test
   import: ghc-options
   type:
     exitcode-stdio-1.0
   main-is:
     test/TestMain.hs
+  other-modules:
+    TestUtils
   hs-source-dirs:
     .
+    test
   build-depends:
     , QuickCheck
+    , async >= 2
     , atomic-counter
     , base >= 4.12
     , tasty
     , tasty-quickcheck
-    , atomic-counter:test-utils
   ghc-options:
     -rtsopts
     -threaded
@@ -166,10 +156,14 @@ benchmark bench
     exitcode-stdio-1.0
   main-is:
     bench/BenchMain.hs
+  other-modules:
+    TestUtils
   hs-source-dirs:
     .
+    test
   build-depends:
     , QuickCheck
+    , async >= 2
     , atomic-counter
     , base >= 4.12
     , primitive
@@ -177,7 +171,6 @@ benchmark bench
     , tasty >= 1.4.2
     , tasty-bench >= 0.3.4
     , tasty-quickcheck
-    , atomic-counter:test-utils
   ghc-options:
     -rtsopts
     -threaded
