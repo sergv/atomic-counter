@@ -45,7 +45,7 @@ tested-with:
 build-type:
   Simple
 
-extra-source-files:
+extra-doc-files:
   Changelog.md
   Readme.md
 
