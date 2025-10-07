@@ -1,3 +1,7 @@
+# 0.1.2.4
+
+- Add `@since` Haddock annotations
+
 # 0.1.2.3
 
 - Remove internal ‘test-utils’ library which wasn’t supposed to be used by clients anyway but was confusing cabal dependency resolution
@@ -25,4 +29,4 @@
 
 # 0.1
 
-Initial release
+- Initial release
