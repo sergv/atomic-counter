@@ -25,11 +25,12 @@ jobs:
           - "9.6"
           - "9.8"
           - "9.10"
+          - "9.12"
         include:
         - os: macOS-latest
-          ghc: "9.10"
+          ghc: "9.12"
         - os: windows-latest
-          ghc: "9.10"
+          ghc: "9.12"
     steps:
 
     - uses: actions/checkout@v4
