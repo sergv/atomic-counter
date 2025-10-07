@@ -108,6 +108,8 @@ foreign import prim "stg_atomicNandCounterzh"
 -- | Atomic compare and swap, i.e. write the new value if the current
 -- value matches the provided old value. Returns the value of the
 -- element before the operation
+--
+-- @since 0.1.2
 foreign import prim "stg_casCounterzh"
   cas :: Counter s -> Int# -> Int# -> State# s -> (# State# s, Int# #)
 

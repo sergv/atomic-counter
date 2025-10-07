@@ -71,6 +71,8 @@ set = coerce Lifted.set
 -- | Atomic compare and swap, i.e. write the new value if the current
 -- value matches the provided old value. Returns the value of the
 -- element before the operation
+--
+-- @since 0.1.2
 cas
   :: Counter
   -> Int -- ^ Expected old value
