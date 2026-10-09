@@ -7,7 +7,7 @@ name:
 version:
   0.1.2.4
 synopsis:
-  Mutable counters that can be modified with atomic operatinos
+  Mutable counters that can be modified with atomic operations
 
 description:
   This package defines Counter type that can be safely modified
